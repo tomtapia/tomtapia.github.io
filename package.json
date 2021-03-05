@@ -4,6 +4,7 @@
   "description": "Official page about me :).",
   "main": "index.html",
   "scripts": {
+    "start": "http-server --port 8080 --verbose -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/tomtapia/tomtapia.github.io/issues"
   },
-  "homepage": "https://github.com/tomtapia/tomtapia.github.io#readme"
+  "homepage": "https://github.com/tomtapia/tomtapia.github.io#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  }
 }
