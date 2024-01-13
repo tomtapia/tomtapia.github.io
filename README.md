@@ -8,10 +8,11 @@ This repository contains the source code for my professional resume website, hig
 - Bootstrap CSS and Start Bootstrap Template
 
 ## Installation
-\```bash
+```bash
 git clone https://github.com/tomtapia/tomtapia.github.io
 # Instructions to run the site
-\```
+npm run start
+```
 
 ## Contribution
 To contribute to this project, please send a pull request or open an issue.
