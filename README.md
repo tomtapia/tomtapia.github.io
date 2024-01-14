@@ -4,8 +4,14 @@
 This repository contains the source code for my professional resume website, highlighting my skills and experience in information technology and software engineering.
 
 ## Technologies Used
-- HTML/CSS/JS
-- Bootstrap CSS and Start Bootstrap Template
+tomtapia/tomtapia.github.io is built on the following main stack:
+
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [Bootstrap Framework](https://getbootstrap.com/)
+
+Full tech stack [here](/techstack.md)
 
 ## Installation
 ```bash
