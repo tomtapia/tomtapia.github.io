@@ -1,0 +1,81 @@
+repo_name: tomtapia/tomtapia.github.io
+report_id: c8fd4d085d3b8d9cefc583ba7d3afe6d
+version: 0.1
+repo_type: Public
+timestamp: '2024-01-14T07:26:33+00:00'
+requested_by: tomtapia
+provider: github
+branch: master
+detected_tools_count: 6
+tools:
+- name: CSS 3
+  description: The latest evolution of the Cascading Style Sheets language
+  website_url: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS3
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/6727/css.png
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io
+  detection_source: Repo Metadata
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io
+  detection_source: Repo Metadata
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io
+  detection_source: Repo Metadata
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io/blob/master/package.json
+  detection_source: package.json
+  last_updated_by: Tomas Tapia
+  last_updated_on: 2016-08-24 13:22:24.000000000 Z
+- name: ecstatic
+  description: A simple static file server middleware
+  package_url: https://www.npmjs.com/ecstatic
+  version: 4.1.4
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/17429/default_f52a9ea80d1a46080182faf142d844b81ca11aa6.png
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: dependabot[bot]
+  last_updated_on: 2021-03-05 15:41:31.000000000 Z
+- name: http-server
+  description: A simple zero-configuration command-line http server
+  package_url: https://www.npmjs.com/http-server
+  version: 0.12.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16118/default_f905d9556a0330de59b502a579c1f5c4be2b48bf.png
+  detection_source_url: https://github.com/tomtapia/tomtapia.github.io/blob/master/package-lock.json
+  detection_source: package.json
+  last_updated_by: Tomás Tapia
+  last_updated_on: 2021-03-05 15:38:49.000000000 Z
