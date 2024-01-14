@@ -13,6 +13,10 @@ tomtapia/tomtapia.github.io is built on the following main stack:
 
 Full tech stack [here](/techstack.md)
 
+## Status
+[![CodeQL](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/github-code-scanning/codeql)
+[![pages-build-deployment](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment)
+
 ## Installation
 ```bash
 git clone https://github.com/tomtapia/tomtapia.github.io
