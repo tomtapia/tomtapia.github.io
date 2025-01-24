@@ -1,11 +1,17 @@
 html {
   height: 100%;
   scroll-padding-top: calc(4.5rem - 1px);
+  scroll-behavior: smooth;
 }
 
 a {
   color: #ffc107;
   text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #e0a800;
 }
 
 .page-section {
@@ -65,6 +71,12 @@ a {
 .btn-xl {
   padding: 1rem 1.75rem;
   font-size: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.btn-xl:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn-social {
@@ -75,6 +87,13 @@ a {
   font-size: 1.25rem;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.btn-social:hover {
+  transform: scale(1.1);
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 
 .bg-navbar {
