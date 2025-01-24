@@ -1,4 +1,4 @@
-# Tomás Tapia - Resume Website
+# Resume Website
 
 ## Description
 This repository contains the source code for my professional resume website, highlighting my skills and experience in information technology and software engineering.
