@@ -742,7 +742,7 @@ a:hover {
 }
 
 .about-section strong {
-  color: var(--accent);
+  color: var(--indigo-300);
   font-weight: 600;
 }
 
