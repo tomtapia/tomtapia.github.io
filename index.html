@@ -116,7 +116,11 @@
         <div class="divider-custom-icon"><i class='bx bx-certification'></i></div>
         <div class="divider-custom-line"></div>
       </div>
-      <div class="row justify-content-center g-4">
+      <div class="certification-carousel-container">
+        <button class="carousel-nav-btn carousel-prev" id="certPrevBtn" aria-label="Previous certifications">
+          <i class='bx bx-chevron-left'></i>
+        </button>
+        <div class="row justify-content-center g-4" id="certificationGrid">
         <div class="col-md-6 col-lg-4">
           <div class="certification-item" 
             data-title="AWS Generative AI Foundational" 
@@ -281,6 +285,10 @@
           </div>
         </div>
 
+        </div>
+        <button class="carousel-nav-btn carousel-next" id="certNextBtn" aria-label="Next certifications">
+          <i class='bx bx-chevron-right'></i>
+        </button>
       </div>
     </div>
   </section>

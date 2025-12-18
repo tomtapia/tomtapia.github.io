@@ -7,6 +7,59 @@
   gtag('js', new Date());
   gtag('config', 'G-J6YT5K3JHY');
 
+  // Certification Carousel Handling
+  const certificationGrid = document.getElementById('certificationGrid');
+  const certPrevBtn = document.getElementById('certPrevBtn');
+  const certNextBtn = document.getElementById('certNextBtn');
+  const allCertItems = document.querySelectorAll('.certification-item');
+  
+  const ITEMS_PER_GROUP = 6;
+  const TOTAL_GROUPS = Math.ceil(allCertItems.length / ITEMS_PER_GROUP);
+  let currentGroup = 0;
+
+  const updateCarouselDisplay = () => {
+    // Hide all items first
+    allCertItems.forEach(item => {
+      item.classList.add('hidden');
+    });
+
+    // Show items for current group
+    const startIdx = currentGroup * ITEMS_PER_GROUP;
+    const endIdx = Math.min(startIdx + ITEMS_PER_GROUP, allCertItems.length);
+    
+    for (let i = startIdx; i < endIdx; i++) {
+      allCertItems[i].classList.remove('hidden');
+    }
+
+    // Update button states
+    certPrevBtn.disabled = currentGroup === 0;
+    certNextBtn.disabled = currentGroup === TOTAL_GROUPS - 1;
+  };
+
+  const goToGroup = (groupIndex) => {
+    if (groupIndex >= 0 && groupIndex < TOTAL_GROUPS) {
+      currentGroup = groupIndex;
+      updateCarouselDisplay();
+    }
+  };
+
+  const goNext = () => {
+    goToGroup(currentGroup + 1);
+  };
+
+  const goPrev = () => {
+    goToGroup(currentGroup - 1);
+  };
+
+  // Event listeners for carousel buttons
+  if (certNextBtn && certPrevBtn) {
+    certNextBtn.addEventListener('click', goNext);
+    certPrevBtn.addEventListener('click', goPrev);
+    
+    // Initialize carousel
+    updateCarouselDisplay();
+  }
+
   // Certification Modal Handling
   const certificationModal = document.getElementById('certificationModal');
   const certificationItems = document.querySelectorAll('.certification-item');

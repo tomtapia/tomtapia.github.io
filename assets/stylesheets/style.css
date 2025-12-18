@@ -498,6 +498,62 @@ a:hover {
 }
 
 /* ===================================
+   CERTIFICATION CAROUSEL
+   =================================== */
+.certification-carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+.carousel-nav-btn {
+  background: var(--accent);
+  border: none;
+  color: white;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.carousel-nav-btn:disabled {
+  background: var(--border-color);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+#certificationGrid {
+  flex: 1;
+  min-width: 0;
+}
+
+.certification-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.certification-item.hidden {
+  display: none;
+}
+
+.certification-item:hover {
+  transform: translateY(-8px);
+}
+
+/* ===================================
    CERTIFICATION CARDS
    =================================== */
 .certification-item {
