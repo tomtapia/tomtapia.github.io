@@ -7,6 +7,56 @@
   gtag('js', new Date());
   gtag('config', 'G-J6YT5K3JHY');
 
+  // Certification Modal Handling
+  const certificationModal = document.getElementById('certificationModal');
+  const certificationItems = document.querySelectorAll('.certification-item');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  if (certificationItems.length > 0) {
+    // Open modal when clicking a certification
+    certificationItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const title = item.dataset.title;
+        const description = item.dataset.description;
+        const validationUrl = item.dataset.validationUrl;
+        const imgSrc = item.querySelector('img').src;
+
+        // Populate modal with data
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalDescription').textContent = description;
+        document.getElementById('modalImage').src = imgSrc;
+        document.getElementById('modalImage').alt = title;
+        document.getElementById('modalLink').href = validationUrl;
+
+        // Show modal
+        certificationModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      });
+    });
+
+    // Close modal when clicking close button
+    closeModalBtn.addEventListener('click', () => {
+      certificationModal.classList.remove('active');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+    });
+
+    // Close modal when clicking outside the modal content
+    certificationModal.addEventListener('click', (event) => {
+      if (event.target === certificationModal) {
+        certificationModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && certificationModal.classList.contains('active')) {
+        certificationModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
+
   // Contact Form Handling
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
