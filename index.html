@@ -37,9 +37,9 @@
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <!-- Google Fonts - Inter & Montserrat -->
+  <!-- Google Fonts -->
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
@@ -54,7 +54,6 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-glass fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="#page-top">TT</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class='bx bx-menu'></i>
@@ -80,37 +79,38 @@
 
   <!-- Hero Section - Asymmetric Layout -->
   <header class="masthead" id="hero">
-    <div class="hero-bg-elements"></div>
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-avatar-wrapper">
-          <img class="masthead-avatar" src="assets/images/Me_Simple.webp" alt="Tomás Tapia - IT Solution Architect"
-            loading="eager" />
-        </div>
-        <div class="hero-text">
-          <h1 class="masthead-heading">Tomás Tapia</h1>
-          <p class="masthead-subheading">Digital Architect Manager | Engineering Manager</p>
-          <p class="hero-description">
-            Building resilience cloud solutions and leading high-performance engineering teams.
-            15+ years transforming complex challenges into robust, reliable, and highly available systems that ensure business continuity even when unexpected events occur.
-          </p>
-          <div class="hero-cta">
-            <a href="https://www.linkedin.com/in/ttapia/" class="btn-primary-custom" target="_blank">
-              <i class='bx bxl-linkedin'></i> Let's Connect
-            </a>
-            <a href="https://github.com/tomtapia" class="btn-outline-custom" target="_blank">
-              <i class='bx bxl-github'></i> View GitHub
-            </a>
+      <section class="hero-variant hero-variant-split hero-final" aria-labelledby="hero-title">
+        <div class="hero-variant-body hero-variant-body-split">
+          <div class="hero-text">
+            <h1 class="masthead-heading" id="hero-title">Tomás Tapia</h1>
+            <p class="hero-subtitle">Digital Architect Manager | Engineering Manager</p>
+            <p class="hero-description">
+              Building resilience cloud solutions and leading high-performance engineering teams.
+              15+ years transforming complex challenges into robust, reliable, and highly available systems that ensure business continuity even when unexpected events occur.
+            </p>
+            <div class="hero-cta">
+              <a href="https://www.linkedin.com/in/ttapia/" class="btn-primary-custom" target="_blank">
+                <i class='bx bxl-linkedin'></i> Let's Connect
+              </a>
+              <a href="https://github.com/tomtapia" class="btn-outline-custom" target="_blank">
+                <i class='bx bxl-github'></i> View GitHub
+              </a>
+            </div>
+          </div>
+          <div class="hero-avatar-wrapper">
+            <img class="masthead-avatar" src="assets/images/Me_Simple.webp" alt="Tomás Tapia - IT Solution Architect"
+              loading="eager" />
           </div>
         </div>
-      </div>
+      </section>
     </div>
   </header>
 
   <!-- Certifications Section -->
   <section class="page-section" id="certifications">
     <div class="container">
-      <h2 class="page-section-heading text-center text-uppercase mb-0">Certifications</h2>
+      <h2 class="page-section-heading text-center mb-0">Certifications</h2>
       <div class="divider-custom">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon"><i class='bx bx-certification'></i></div>
@@ -289,7 +289,7 @@
   <!-- About Section -->
   <section class="page-section page-section-alt about-section" id="about">
     <div class="container">
-      <h2 class="page-section-heading text-center text-uppercase">About</h2>
+      <h2 class="page-section-heading text-center">About</h2>
       <div class="divider-custom">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon"><i class='bx bx-user'></i></div>
@@ -339,7 +339,7 @@
   <!-- Videos Section -->
   <section class="page-section" id="videos">
     <div class="container">
-      <h2 class="page-section-heading text-center text-uppercase mb-0">Videos</h2>
+      <h2 class="page-section-heading text-center mb-0">Videos</h2>
       <div class="divider-custom">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon"><i class='bx bx-video'></i></div>
@@ -409,7 +409,7 @@
   <!-- Projects Section -->
   <section class="page-section page-section-alt" id="projects">
     <div class="container">
-      <h2 class="page-section-heading text-center text-uppercase mb-0">Featured Projects</h2>
+      <h2 class="page-section-heading text-center mb-0">Featured Projects</h2>
       <div class="divider-custom">
         <div class="divider-custom-line"></div>
         <div class="divider-custom-icon"><i class='bx bx-code-block'></i></div>
@@ -526,20 +526,20 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase">Location</h4>
+          <h4>Location</h4>
           <p class="lead mb-0">
             With <i class='bx bxs-heart' style="color: #EF4444;"></i> from Chile
           </p>
         </div>
         <div class="col-lg-4 mb-5 mb-lg-0">
-          <h4 class="text-uppercase">Follow Me</h4>
+          <h4>Follow Me</h4>
           <a class="btn-social mx-1" href="https://github.com/tomtapia" aria-label="GitHub"><i
               class='bx bxl-github bx-sm'></i></a>
           <a class="btn-social mx-1" href="https://www.linkedin.com/in/ttapia/" aria-label="LinkedIn"><i
               class='bx bxl-linkedin bx-sm'></i></a>
         </div>
         <div class="col-lg-4">
-          <h4 class="text-uppercase">About this Site</h4>
+          <h4>About this Site</h4>
           <p class="lead mb-0">
             Built with <a href="https://getbootstrap.com/">Bootstrap</a> and
             <a href="https://boxicons.com/">Boxicons</a>.
@@ -574,7 +574,7 @@
   <!-- Copyright -->
   <div class="copyright py-4 text-center">
     <div class="container">
-      <small>Copyright © Kaisa Network SpA. 2025</small>
+      <small>Copyright © <a href="https://www.kaisanetwork.net/">Kaisa Network</a>. 2026</small>
     </div>
   </div>
 
