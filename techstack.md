@@ -60,9 +60,9 @@ Full tech stack [here](/techstack.md)
 </td>
 
 <td align='center'>
-  <img width='36' height='36' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png' alt='npm'>
+  <img width='36' height='36' src='https://img.stackshare.io/service/1046/git.png' alt='pnpm'>
   <br>
-  <sub><a href="https://www.npmjs.com/">npm</a></sub>
+  <sub><a href="https://pnpm.io/">pnpm</a></sub>
   <br>
   <sub></sub>
 </td>
@@ -73,12 +73,11 @@ Full tech stack [here](/techstack.md)
 
 ## <img src='https://img.stackshare.io/group.svg' /> Open source packages (2)</h2>
 
-## <img width='24' height='24' src='https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png'/> npm (2)
+## <img width='24' height='24' src='https://img.stackshare.io/service/1046/git.png'/> pnpm (1)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
-|[ecstatic](https://www.npmjs.com/ecstatic)|v4.1.4|03/05/21|dependabot[bot] |MIT|N/A|
-|[http-server](https://www.npmjs.com/http-server)|v0.12.3|03/05/21|Tomás Tapia |MIT|N/A|
+|[http-server](https://github.com/http-party/http-server)|v14.1.1|03/10/26|Tomás Tapia |MIT|N/A|
 
 <br/>
 <div align='center'>

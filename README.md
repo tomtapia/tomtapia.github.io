@@ -15,13 +15,13 @@ Full tech stack [here](/techstack.md)
 
 ## Status
 [![CodeQL](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/github-code-scanning/codeql)
-[![pages-build-deployment](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=master)](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment)
+[![pages-build-deployment](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=main)](https://github.com/tomtapia/tomtapia.github.io/actions/workflows/pages/pages-build-deployment)
 
 ## Installation
 ```bash
 git clone https://github.com/tomtapia/tomtapia.github.io
-# Instructions to run the site
-npm run start
+pnpm install
+pnpm start
 ```
 
 ## Contribution
