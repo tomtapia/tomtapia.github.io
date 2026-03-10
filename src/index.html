@@ -46,9 +46,9 @@
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer">
-  <!-- Custom Styles -->
+  <!-- Custom styles are imported through /main.js -->
   <!-- Analytics -->
   <script src="https://analytics.ahrefs.com/analytics.js" data-key="of2g14Zze5nXjsDZmezTng" async></script>
 </head>
@@ -81,7 +81,7 @@
   </nav>
 
   <main id="main-content">
-  <!-- Hero Section - Asymmetric Layout -->
+  <!-- Hero Section -->
   <header class="masthead" id="hero">
     <div class="container">
       <section class="hero-variant hero-variant-split hero-final" aria-labelledby="hero-title">
@@ -410,7 +410,7 @@
     </div>
   </section>
 
-  <!-- Projects Section -->
+  <!-- Projects Section: dynamic GitHub repository grid -->
   <section class="page-section page-section-alt" id="projects">
     <div class="container">
       <h2 class="page-section-heading text-center mb-0">Featured Projects</h2>
@@ -419,14 +419,24 @@
         <div class="divider-custom-icon"><i class='bx bx-code-block'></i></div>
         <div class="divider-custom-line"></div>
       </div>
+      <!-- The grid is hydrated client-side from src/assets/javascripts/github-projects.js -->
       <div class="featured-projects-shell" aria-live="polite">
         <div id="featured-projects-grid" class="row g-4">
           <div class="col-12 text-center" id="featured-projects-loading">
             <p class="lead mb-0">Loading recently updated projects from GitHub...</p>
           </div>
         </div>
+        <noscript>
+          <div class="text-center mt-3">
+            <p class="lead mb-3">JavaScript is disabled, so live project data can't be loaded.</p>
+            <a href="https://github.com/tomtapia" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
+              <i class='bx bxl-github'></i> View All Projects on GitHub
+            </a>
+          </div>
+        </noscript>
       </div>
-      <div id="featured-projects-error" class="featured-projects-feedback text-center d-none" role="status">
+      <!-- Fallback state shown when the GitHub API request fails -->
+      <div id="featured-projects-error" class="featured-projects-feedback text-center d-none" role="alert">
         <p class="lead mb-3">Projects could not be loaded right now.</p>
         <a href="https://github.com/tomtapia" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
           <i class='bx bxl-github'></i> View All Projects
@@ -451,54 +461,61 @@
   </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer: four-column contact, site, and privacy links -->
   <footer class="footer text-center">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
           <h4>Location</h4>
           <p class="lead mb-0">
-            With <i class='bx bxs-heart' style="color: #EF4444;"></i> from Chile
+            With <i class='bx bxs-heart' style="color: #EF4444;"></i> from 🇨🇱
           </p>
         </div>
-        <div class="col-lg-4 mb-5 mb-lg-0">
+        <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
           <h4>Follow Me</h4>
           <a class="btn-social mx-1" href="https://github.com/tomtapia" aria-label="GitHub"><i
               class='bx bxl-github bx-sm'></i></a>
           <a class="btn-social mx-1" href="https://www.linkedin.com/in/ttapia/" aria-label="LinkedIn"><i
               class='bx bxl-linkedin bx-sm'></i></a>
         </div>
-        <div class="col-lg-4">
+        <div class="col-md-6 col-lg-3 mb-5 mb-md-0">
           <h4>About this Site</h4>
           <p class="lead mb-0">
             Built with <a href="https://getbootstrap.com/">Bootstrap</a> and
             <a href="https://boxicons.com/">Boxicons</a>.
             Source on <a href="https://github.com/tomtapia/tomtapia.github.io">GitHub</a>.
           </p>
-          <p class="footer-meta-links">
-            <a href="/privacy.html">Privacy Policy</a>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <h4>Privacy</h4>
+          <p class="lead mb-0">
+            Check the site <a href="/privacy.html">privacy terms</a> and data handling details.
           </p>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Certification Modal Overlay -->
-  <div class="certification-modal" id="certificationModal">
-    <div class="certification-modal-content">
-      <button class="certification-modal-close" id="closeModal" type="button" aria-label="Close certification details">
-        <i class='bx bx-x'></i>
-      </button>
-      <div class="certification-modal-body">
-        <div class="certification-modal-image">
-          <img id="modalImage" src="" alt="Certification" loading="lazy" />
-        </div>
-        <div class="certification-modal-info">
-          <h3 id="modalTitle">Certification details</h3>
-          <p id="modalDescription"></p>
-          <a id="modalLink" href="" target="_blank" rel="noopener noreferrer" class="btn-primary-custom">
-            <i class='bx bx-link-external'></i> View Badge Validation
-          </a>
+  <!-- Certification Modal -->
+  <div class="modal fade certification-modal" id="certificationModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+      <div class="modal-content certification-modal-content">
+        <div class="modal-body certification-modal-layout">
+          <button class="certification-modal-close" type="button" data-bs-dismiss="modal" aria-label="Close certification details">
+            <i class='bx bx-x'></i>
+          </button>
+          <div class="certification-modal-body">
+            <div class="certification-modal-image">
+              <img id="modalImage" src="" alt="Certification" loading="lazy" />
+            </div>
+            <div class="certification-modal-info">
+              <h3 id="modalTitle">Certification details</h3>
+              <p id="modalDescription"></p>
+              <a id="modalLink" href="" target="_blank" rel="noopener noreferrer" class="btn-primary-custom">
+                <i class='bx bx-link-external'></i> View Badge Validation
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -541,11 +558,12 @@
   </div>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/js/bootstrap.bundle.min.js"
     crossorigin="anonymous" referrerpolicy="no-referrer"
     defer></script>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J6YT5K3JHY"></script>
+  <!-- Vite entrypoint for the homepage -->
   <script type="module" src="/main.js"></script>
   <!-- Structured Data -->
   <script type="application/ld+json">

@@ -99,9 +99,7 @@ function buildProjectCard(repository) {
   button.append(buttonIcon, ' View Repository');
 
   meta.append(
-    createMetaItem('bx-code-alt', repository.language || 'Code'),
-    createMetaItem('bx-star', `${repository.stargazers_count} stars`),
-    createMetaItem('bx-git-branch', `${repository.forks_count} forks`)
+    createMetaItem('bx-code-alt', repository.language || 'Code')
   );
 
   image.append(icon);
@@ -112,7 +110,12 @@ function buildProjectCard(repository) {
   heading.append(title, updated);
   header.append(image, heading);
   links.append(button, stats);
-  content.append(description, meta, tech, links);
+
+  content.append(description, meta);
+  if (tech.childElementCount > 0) {
+    content.append(tech);
+  }
+  content.append(links);
   card.append(header, content);
   item.append(card);
   column.append(item);
@@ -150,7 +153,6 @@ async function fetchRepositories() {
   const response = await fetch(API_URL, {
     headers: {
       Accept: 'application/vnd.github+json',
-      'X-GitHub-Api-Version': '2022-11-28',
     },
   });
 
@@ -173,8 +175,6 @@ export async function initFeaturedProjects() {
   try {
     const repositories = normalizeRepositories(await fetchRepositories());
 
-    loading.remove();
-
     if (repositories.length === 0) {
       showFeedback(error, 'No public repositories matched the current filters.');
       return;
@@ -185,7 +185,8 @@ export async function initFeaturedProjects() {
     });
   } catch (fetchError) {
     console.error('Failed to load featured projects from GitHub.', fetchError);
-    loading.remove();
     showFeedback(error, 'Projects could not be loaded right now.');
+  } finally {
+    loading.remove();
   }
 }

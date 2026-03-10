@@ -630,22 +630,21 @@ a:hover {
    CERTIFICATION MODAL
    =================================== */
 .certification-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(6, 6, 5, 0.78);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  overflow-y: auto;
+  --bs-modal-bg: transparent;
+  --bs-modal-border-color: transparent;
+  --bs-modal-border-width: 0;
+  --bs-modal-border-radius: 0;
+  --bs-modal-padding: 0;
+  --bs-modal-margin: 2rem;
+  --bs-modal-box-shadow: none;
+  --bs-modal-header-border-width: 0;
+  --bs-modal-footer-border-width: 0;
+  --bs-backdrop-bg: #060605;
+  --bs-backdrop-opacity: 0.78;
 }
 
-.certification-modal.active {
-  display: flex;
+.certification-modal .modal-dialog {
+  max-width: 900px;
 }
 
 .certification-modal-content {
@@ -656,6 +655,16 @@ a:hover {
   max-width: 900px;
   position: relative;
   box-shadow: 0 26px 60px rgba(0, 0, 0, 0.34);
+}
+
+.certification-modal .modal-body {
+  padding: 0;
+}
+
+.certification-modal-layout {
+  display: grid;
+  gap: 1.25rem;
+  padding: 2rem;
 }
 
 .certification-modal-close {
@@ -736,7 +745,46 @@ a:hover {
   align-self: flex-start;
 }
 
+.certification-modal-content {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+}
+
+.certification-modal-content .certification-modal-body {
+  gap: 1.5rem;
+}
+
+.certification-modal-content .certification-modal-image {
+  background: var(--bg-dark);
+  border-radius: 0.65rem;
+  min-height: 360px;
+  padding: 1.1rem;
+}
+
+.certification-modal-content .certification-modal-info {
+  padding-top: 0.1rem;
+}
+
+.certification-modal-content .certification-modal-info h3 {
+  font-size: 1.45rem;
+  letter-spacing: -0.015em;
+  margin-bottom: 0.85rem;
+}
+
+.certification-modal-content .certification-modal-info p {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
 @media (max-width: 768px) {
+  .certification-modal-layout {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
   .certification-modal-body {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -763,7 +811,7 @@ a:hover {
   }
 
   .certification-modal-content {
-    padding: 0;
+    margin: 0;
   }
 }
 
