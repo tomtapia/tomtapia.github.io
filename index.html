@@ -31,8 +31,11 @@
   <meta name="twitter:image" content="https://tomtapia.github.io/assets/images/header.webp" />
   <meta name="twitter:image:alt" content="Tomás Tapia personal website preview" />
   <link rel="canonical" href="https://tomtapia.github.io/" />
+  <link rel="preload" as="image" href="assets/images/Me_Simple.webp" imagesrcset="assets/images/Me_Simple.webp" imagesizes="256px" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <title>Tomás Tapia | Cloud Architect and Engineering Leader</title>
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -72,6 +75,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact.html">Contact</a>
           </li>
         </ul>
       </div>
@@ -126,7 +132,7 @@
               data-description="AWS Employees earning the AWS Generative AI Foundational (L100) Accreditation Badge have demonstrated foundational knowledge of AI/ML, generative AI technologies, and associated AWS services and tools. They can describe the basic concepts of generative AI, understand the capabilities and limitations of generative AI for solving business problems, and explain guidelines for responsible and secure generative AI development."
               data-validation-url="https://www.credly.com/badges/69ef64a3-f563-406a-a82d-74bcbb05cf24/linked_in_profile">
               <img class="img-fluid certification-img" src="/assets/images/AWS_GenAIFC.webp"
-                alt="AWS Generative AI Foundational" width="660" height="660" loading="lazy" />
+                alt="AWS Generative AI Foundational" width="660" height="660" loading="eager" />
             </div>
           </div>
           <div class="col-md-6 col-lg-4 certification-page-item">
@@ -135,7 +141,7 @@
               data-description="Earners of this certification have a comprehensive understanding of AWS services and technologies. They demonstrated the ability to build secure and robust solutions using architectural design principles based on customer requirements. Badge owners are able to strategically design well-architected distributed systems that are scalable, resilient, efficient, and fault-tolerant."
               data-validation-url="https://www.credly.com/badges/30aa2d20-019d-4c77-a95b-9d56e69060f2/linked_in_profile">
               <img class="img-fluid certification-img" src="assets/images/AWS_SAAC.webp"
-                alt="AWS Certified Solutions Architect – Associate" width="340" height="340" loading="lazy" />
+                alt="AWS Certified Solutions Architect – Associate" width="340" height="340" loading="eager" />
             </div>
           </div>
           <div class="col-md-6 col-lg-4 certification-page-item">
@@ -548,6 +554,11 @@
             <a href="https://boxicons.com/">Boxicons</a>.
             Source on <a href="https://github.com/tomtapia/tomtapia.github.io">GitHub</a>.
           </p>
+          <p class="footer-meta-links">
+            <a href="/about.html">About</a>
+            <a href="/contact.html">Contact</a>
+            <a href="/privacy.html">Privacy</a>
+          </p>
         </div>
       </div>
     </div>
@@ -561,7 +572,7 @@
       </button>
       <div class="certification-modal-body">
         <div class="certification-modal-image">
-          <img id="modalImage" src="" alt="Certification" />
+          <img id="modalImage" src="" alt="Certification" loading="lazy" />
         </div>
         <div class="certification-modal-info">
           <h3 id="modalTitle">Certification details</h3>
@@ -622,14 +633,43 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Tomás Tapia",
-    "jobTitle": "IT Solution Architect",
-    "description": "IT Solution Architect | Technical Lead | Full-Stack Developer",
-    "url": "https://tomtapia.github.io/",
-    "sameAs": [
-      "https://github.com/tomtapia",
-      "https://www.linkedin.com/in/ttapia/"
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://tomtapia.github.io/#website",
+        "url": "https://tomtapia.github.io/",
+        "name": "Tomás Tapia",
+        "description": "Cloud architect and engineering leader with 15+ years building resilient platforms across AWS, GCP, and Azure.",
+        "publisher": {
+          "@id": "https://tomtapia.github.io/#person"
+        }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://tomtapia.github.io/#person",
+        "name": "Tomás Tapia",
+        "jobTitle": "Cloud Architect and Engineering Leader",
+        "description": "Cloud architect and engineering leader focused on resilient platforms, cloud architecture, and technical leadership.",
+        "url": "https://tomtapia.github.io/",
+        "image": "https://tomtapia.github.io/assets/images/Me_Simple.webp",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Kaisa Network"
+        },
+        "knowsAbout": [
+          "Cloud Architecture",
+          "AWS",
+          "Google Cloud",
+          "Azure",
+          "Kubernetes",
+          "Serverless",
+          "Engineering Leadership"
+        ],
+        "sameAs": [
+          "https://github.com/tomtapia",
+          "https://www.linkedin.com/in/ttapia/"
+        ]
+      }
     ]
   }
   </script>

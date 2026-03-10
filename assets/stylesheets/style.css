@@ -406,6 +406,68 @@ a:hover {
   max-width: var(--container-width);
 }
 
+.utility-page {
+  padding: 7.5rem 0 4.5rem;
+  min-height: 100vh;
+}
+
+.utility-page .container {
+  max-width: 840px;
+}
+
+.utility-page-header {
+  margin-block-end: 2rem;
+}
+
+.utility-page-title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin: 0 0 0.85rem;
+}
+
+.utility-page-meta {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.utility-page-copy {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.utility-page-copy h2 {
+  font-size: 1.2rem;
+  margin: 1rem 0 0;
+}
+
+.utility-page-copy p,
+.utility-page-copy li {
+  color: var(--text-secondary);
+}
+
+.utility-page-copy ul {
+  margin: 0;
+  padding-inline-start: 1.2rem;
+}
+
+.utility-page-actions,
+.footer-meta-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.utility-page-actions {
+  margin-top: 1rem;
+}
+
+.footer-meta-links {
+  margin: 1rem 0 0;
+  font-size: 0.95rem;
+}
+
 /* ===================================
    DIVIDERS
    =================================== */
