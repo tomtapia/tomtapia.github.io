@@ -552,10 +552,16 @@
   // Certification Modal Handling
   const certificationModal = document.getElementById('certificationModal');
   const certificationItems = document.querySelectorAll('.certification-item');
-  const closeModalBtn = document.getElementById('closeModal');
+  const certificationModalInstance = certificationModal && window.bootstrap
+    ? new window.bootstrap.Modal(certificationModal)
+    : null;
 
-  if (certificationItems.length > 0) {
-    // Open modal when clicking a certification
+  if (certificationItems.length > 0 && certificationModalInstance) {
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalImage = document.getElementById('modalImage');
+    const modalLink = document.getElementById('modalLink');
+
     certificationItems.forEach((item) => {
       item.addEventListener('click', () => {
         const title = item.dataset.title;
@@ -563,39 +569,14 @@
         const validationUrl = item.dataset.validationUrl;
         const imgSrc = item.querySelector('img').src;
 
-        // Populate modal with data
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalDescription').textContent = description;
-        document.getElementById('modalImage').src = imgSrc;
-        document.getElementById('modalImage').alt = title;
-        document.getElementById('modalLink').href = validationUrl;
+        modalTitle.textContent = title;
+        modalDescription.textContent = description;
+        modalImage.src = imgSrc;
+        modalImage.alt = title;
+        modalLink.href = validationUrl;
 
-        // Show modal
-        certificationModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling
+        certificationModalInstance.show();
       });
-    });
-
-    // Close modal when clicking close button
-    closeModalBtn.addEventListener('click', () => {
-      certificationModal.classList.remove('active');
-      document.body.style.overflow = 'auto'; // Restore scrolling
-    });
-
-    // Close modal when clicking outside the modal content
-    certificationModal.addEventListener('click', (event) => {
-      if (event.target === certificationModal) {
-        certificationModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
-
-    // Close modal with Escape key
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && certificationModal.classList.contains('active')) {
-        certificationModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
     });
   }
 
