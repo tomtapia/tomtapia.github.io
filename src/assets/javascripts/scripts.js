@@ -552,18 +552,36 @@
   // Certification Modal Handling
   const certificationModal = document.getElementById('certificationModal');
   const certificationItems = document.querySelectorAll('.certification-item');
-  const certificationModalInstance = certificationModal && window.bootstrap
-    ? new window.bootstrap.Modal(certificationModal)
-    : null;
 
-  if (certificationItems.length > 0 && certificationModalInstance) {
+  if (certificationItems.length > 0 && certificationModal) {
     const modalTitle = document.getElementById('modalTitle');
     const modalDescription = document.getElementById('modalDescription');
     const modalImage = document.getElementById('modalImage');
     const modalLink = document.getElementById('modalLink');
+    let certificationModalInstance = null;
+
+    const getCertificationModalInstance = () => {
+      if (certificationModalInstance) {
+        return certificationModalInstance;
+      }
+
+      if (!window.bootstrap?.Modal) {
+        return null;
+      }
+
+      certificationModalInstance = window.bootstrap.Modal.getOrCreateInstance(certificationModal);
+      return certificationModalInstance;
+    };
 
     certificationItems.forEach((item) => {
       item.addEventListener('click', () => {
+        const modalInstance = getCertificationModalInstance();
+
+        if (!modalInstance) {
+          console.error('Bootstrap Modal is not available for certification details.');
+          return;
+        }
+
         const title = item.dataset.title;
         const description = item.dataset.description;
         const validationUrl = item.dataset.validationUrl;
@@ -575,7 +593,7 @@
         modalImage.alt = title;
         modalLink.href = validationUrl;
 
-        certificationModalInstance.show();
+        modalInstance.show();
       });
     });
   }
