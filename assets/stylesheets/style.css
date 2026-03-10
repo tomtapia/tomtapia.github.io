@@ -214,8 +214,22 @@ a:hover {
   content: "";
   position: absolute;
   inset: -0.75rem;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  border-top-color: var(--accent);
+  border-right-color: var(--accent);
+  opacity: 0.45;
+  pointer-events: none;
+  animation: spin-ring 10s linear infinite;
+}
+
+.hero-avatar-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -0.75rem;
   border: 1px solid var(--border-color);
   border-radius: 50%;
+  opacity: 0.75;
   pointer-events: none;
 }
 
@@ -228,6 +242,16 @@ a:hover {
   box-shadow: var(--shadow-soft);
   position: relative;
   z-index: 1;
+}
+
+@keyframes spin-ring {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .masthead-heading {
@@ -323,12 +347,22 @@ a:hover {
     inset: -0.65rem;
   }
 
+  .hero-avatar-wrapper::after {
+    inset: -0.65rem;
+  }
+
   .hero-avatar-wrapper {
     justify-self: start;
   }
 
   .hero-cta {
     justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-avatar-wrapper::before {
+    animation: none;
   }
 }
 

@@ -11,6 +11,9 @@ importers:
       http-server:
         specifier: ^14.1.1
         version: 14.1.1
+      squirrelscan:
+        specifier: ^0.0.38
+        version: 0.0.38
 
 packages:
 
@@ -191,6 +194,13 @@ packages:
   side-channel@1.1.0:
     resolution: {integrity: sha512-ZX99e6tRweoUXqR+VBrslhda51Nh5MTQwou5tnUDgbtyM0dBgmhEDtWGP/xbKn6hqfPRHujUNwz5fy/wbbhnpw==}
     engines: {node: '>= 0.4'}
+
+  squirrelscan@0.0.38:
+    resolution: {integrity: sha512-BB2hLWOIkcqv9581FpyiKkKgTKymuWnYt6fgaZl8wfe85STjmqSXKQsfBFIrjsaUa1+BJmAkWjRizA0bgcyCOA==}
+    engines: {node: '>=18'}
+    cpu: [x64, arm64]
+    os: [darwin, linux, win32]
+    hasBin: true
 
   supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -390,6 +400,8 @@ snapshots:
       side-channel-list: 1.0.0
       side-channel-map: 1.0.1
       side-channel-weakmap: 1.0.2
+
+  squirrelscan@0.0.38: {}
 
   supports-color@7.2.0:
     dependencies:
