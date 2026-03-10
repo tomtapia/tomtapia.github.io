@@ -419,93 +419,18 @@
         <div class="divider-custom-icon"><i class='bx bx-code-block'></i></div>
         <div class="divider-custom-line"></div>
       </div>
-      <div class="row justify-content-center g-4">
-        <div class="col-md-6 col-lg-4">
-          <div class="project-item">
-            <div class="project-card">
-              <div class="project-image">
-                <i class='bx bxl-aws project-icon'></i>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">AWS Trusted Advisor MCP Server</h3>
-                <p class="project-description">A Model Context Protocol server providing access to AWS Trusted Advisor
-                  through both legacy Support API and modern TrustedAdvisor API endpoints.</p>
-                <div class="project-tech">
-                  <span class="tech-badge">TypeScript</span>
-                  <span class="tech-badge">AWS</span>
-                  <span class="tech-badge">MCP</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/tomtapia/mcp-trustedadvisor-server" class="btn btn-sm btn-outline-primary"
-                    target="_blank" rel="noopener noreferrer">
-                    <i class='bx bxl-github'></i> View Trusted Advisor MCP
-                  </a>
-                  <span class="project-stats">
-                    <i class='bx bx-star'></i> 2
-                    <i class='bx bx-git-branch'></i> 1
-                  </span>
-                </div>
-              </div>
-            </div>
+      <div class="featured-projects-shell" aria-live="polite">
+        <div id="featured-projects-grid" class="row g-4">
+          <div class="col-12 text-center" id="featured-projects-loading">
+            <p class="lead mb-0">Loading recently updated projects from GitHub...</p>
           </div>
         </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="project-item">
-            <div class="project-card">
-              <div class="project-image">
-                <i class='bx bxl-google-cloud project-icon'></i>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">Cloud Run Microservice Template</h3>
-                <p class="project-description">Template for creating microservices on GCP Cloud Run using NestJS with
-                  structured logging via Pino.</p>
-                <div class="project-tech">
-                  <span class="tech-badge">TypeScript</span>
-                  <span class="tech-badge">NestJS</span>
-                  <span class="tech-badge">GCP</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/tomtapia/cloud-run-microservice-template"
-                    class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener noreferrer">
-                    <i class='bx bxl-github'></i> View Cloud Run Template
-                  </a>
-                  <span class="project-stats">
-                    <i class='bx bx-star'></i> 0
-                    <i class='bx bx-git-branch'></i> 1
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <div class="project-item">
-            <div class="project-card">
-              <div class="project-image">
-                <i class='bx bxl-nodejs project-icon'></i>
-              </div>
-              <div class="project-content">
-                <h3 class="project-title">API Test Project</h3>
-                <p class="project-description">NestJS application focused on CI/CD integration and Swagger documentation
-                  as an example for scalable server-side apps.</p>
-                <div class="project-tech">
-                  <span class="tech-badge">TypeScript</span>
-                  <span class="tech-badge">NestJS</span>
-                  <span class="tech-badge">CI/CD</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/tomtapia" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener noreferrer">
-                    <i class='bx bxl-github'></i> View API Test Repo
-                  </a>
-                  <span class="project-stats">
-                    <i class='bx bx-star'></i> 0
-                    <i class='bx bx-git-branch'></i> 1
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div id="featured-projects-error" class="featured-projects-feedback text-center d-none" role="status">
+        <p class="lead mb-3">Projects could not be loaded right now.</p>
+        <a href="https://github.com/tomtapia" class="btn btn-outline-primary" target="_blank" rel="noopener noreferrer">
+          <i class='bx bxl-github'></i> View All Projects
+        </a>
       </div>
       <div class="row mt-5">
         <div class="col-lg-8 mx-auto text-center">

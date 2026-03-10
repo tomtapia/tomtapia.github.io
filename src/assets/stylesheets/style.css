@@ -774,6 +774,14 @@ a:hover {
   height: 100%;
 }
 
+.featured-projects-shell {
+  display: block;
+}
+
+.featured-projects-feedback {
+  margin-top: 1rem;
+}
+
 .project-card {
   background: var(--bg-secondary);
   border-radius: 0.9rem;
@@ -790,18 +798,24 @@ a:hover {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.project-image {
-  text-align: center;
+.project-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
   margin-bottom: 1rem;
 }
 
+.project-image {
+  flex: 0 0 auto;
+}
+
 .project-icon {
-  font-size: 2.2rem;
+  font-size: 1.6rem;
   color: var(--accent);
   background: var(--accent-soft);
   border: 1px solid rgba(176, 108, 62, 0.2);
-  width: 62px;
-  height: 62px;
+  width: 52px;
+  height: 52px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -814,16 +828,19 @@ a:hover {
 }
 
 .project-content {
-  text-align: center;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
+.project-heading {
+  min-width: 0;
+}
+
 .project-title {
   color: var(--text-primary);
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
   font-size: 1.15rem;
   letter-spacing: -0.02em;
 }
@@ -836,11 +853,24 @@ a:hover {
   flex: 1;
 }
 
-.project-tech {
-  margin-bottom: 1.25rem;
+.project-meta {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.project-meta-item i {
+  color: var(--accent);
+  margin-right: 0.2rem;
+}
+
+.project-tech {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
@@ -857,7 +887,8 @@ a:hover {
 .project-links {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
+  gap: 0.75rem;
   margin-top: auto;
 }
 
@@ -868,6 +899,7 @@ a:hover {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  white-space: nowrap;
 }
 
 .project-links .btn-outline-primary:hover {
@@ -878,16 +910,24 @@ a:hover {
 .project-stats {
   font-size: 0.8rem;
   color: var(--text-muted);
+  text-align: right;
 }
 
-.project-stats i {
-  color: var(--accent);
-  margin-right: 0.25rem;
-  margin-left: 0.75rem;
+.project-updated {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  margin-bottom: 0;
 }
 
-.project-stats i:first-child {
-  margin-left: 0;
+@media (max-width: 767.98px) {
+  .project-links {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .project-stats {
+    text-align: left;
+  }
 }
 
 /* ===================================
