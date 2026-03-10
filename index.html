@@ -578,6 +578,35 @@
     </div>
   </div>
 
+  <div class="theme-switcher" id="themeSwitcher">
+    <button class="theme-switcher-toggle" id="themeSwitcherToggle" type="button" aria-expanded="false"
+      aria-controls="themeSwitcherPanel" aria-label="Open color palette switcher">
+      <i class='bx bx-palette'></i>
+    </button>
+    <aside class="theme-switcher-panel" id="themeSwitcherPanel" aria-label="Theme switcher" hidden>
+      <div class="theme-switcher-group">
+        <label class="theme-switcher-label" for="themeModeSelect">Mode</label>
+        <select class="theme-switcher-select" id="themeModeSelect">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+        </select>
+      </div>
+      <div class="theme-switcher-group">
+        <label class="theme-switcher-label" for="themePaletteSelect">Palette</label>
+        <select class="theme-switcher-select" id="themePaletteSelect">
+          <option value="minimal-effort">Minimal Effort</option>
+          <option value="editorial-copper">Editorial Copper</option>
+          <option value="graphite-olive">Graphite Olive</option>
+          <option value="stone-terracotta">Stone Terracotta</option>
+          <option value="slate-ink">Slate Ink</option>
+          <option value="charcoal-brass">Charcoal Brass</option>
+          <option value="ivory-editorial">Ivory Editorial</option>
+          <option value="sand-studio">Sand Studio</option>
+        </select>
+      </div>
+    </aside>
+  </div>
+
   <!-- Bootstrap JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
     crossorigin="anonymous" referrerpolicy="no-referrer"
