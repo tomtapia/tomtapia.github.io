@@ -3,6 +3,13 @@
   "version": "0.0.1",
   "description": "Official page about me :).",
   "packageManager": "pnpm@10.31.0",
+  "pnpm": {
+    "overrides": {
+      "brace-expansion": "^2.0.3",
+      "picomatch@^2.2.2": "^2.3.2",
+      "picomatch@^4.0.3": "^4.0.4"
+    }
+  },
   "main": "src/index.html",
   "scripts": {
     "start": "vite --host 127.0.0.1 --port 8080",
