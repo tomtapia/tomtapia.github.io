@@ -5,6 +5,16 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 export default defineConfig({
   root: 'src',
   publicDir: 'public',
+  server: {
+    host: '127.0.0.1',
+    port: 8080,
+    strictPort: true,
+  },
+  preview: {
+    host: '127.0.0.1',
+    port: 4173,
+    strictPort: true,
+  },
   plugins: [
     createHtmlPlugin({
       minify: true,

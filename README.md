@@ -24,6 +24,10 @@ pnpm install
 pnpm start
 ```
 
+## Development Security Notes
+- The Vite dev server and preview server are intentionally bound to 127.0.0.1.
+- Do not expose Vite to LAN or the public internet unless that change is explicitly required and risk-reviewed first.
+
 ## Contribution
 To contribute to this project, please send a pull request or open an issue.
 
