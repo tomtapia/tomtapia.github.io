@@ -51,17 +51,3 @@ tools:
   detection_source: package.json
   last_updated_by: Tomas Tapia
   last_updated_on: 2016-08-24 13:22:24.000000000 Z
-- name: http-server
-  description: A simple zero-configuration command-line http server
-  package_url: https://github.com/http-party/http-server
-  version: 14.1.1
-  license: MIT
-  open_source: true
-  hosted_saas: false
-  category: Libraries
-  sub_category: Packages
-  image_url: https://img.stackshare.io/package/16118/default_f905d9556a0330de59b502a579c1f5c4be2b48bf.png
-  detection_source_url: https://github.com/tomtapia/tomtapia.github.io/blob/main/pnpm-lock.yaml
-  detection_source: package.json
-  last_updated_by: Tomás Tapia
-  last_updated_on: 2026-03-10 00:00:00.000000000 Z

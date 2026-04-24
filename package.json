@@ -28,7 +28,6 @@
   },
   "homepage": "https://github.com/tomtapia/tomtapia.github.io#readme",
   "devDependencies": {
-    "http-server": "^14.1.1",
     "squirrelscan": "^0.0.38",
     "vite": "^7.3.2",
     "vite-plugin-html": "^3.2.2"
