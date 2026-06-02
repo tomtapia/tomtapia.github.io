@@ -1,39 +1,67 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repo is a Vite-based static site for `tomtapia.github.io`. Keep page entry files in `src/`:
-- `src/index.html` and `src/privacy.html` define page markup.
-- `src/main.js` and `src/privacy.js` bootstrap each page.
-- `src/assets/javascripts/` holds shared browser logic such as `scripts.js` and `github-projects.js`.
-- `src/assets/stylesheets/style.css` is the main stylesheet.
-- `src/assets/images/` stores local image assets.
-- `src/public/` contains static files copied as-is at build time, including `robots.txt` and `sitemap.xml`.
-- `.github/workflows/` contains Pages deploy and repository automation workflows.
+
+Vite-based static site for GitHub Pages. Multi-page setup with entry points in `src/`:
+
+- `src/index.html`, `src/privacy.html` — page markup
+- `src/main.js`, `src/privacy.js` — per-page entry points
+- `src/assets/javascripts/` — shared logic (e.g., `scripts.js`, `github-projects.js`)
+- `src/assets/stylesheets/style.css` — main stylesheet
+- `src/assets/images/` — local image assets
+- `src/public/` — static files copied as-is (`robots.txt`, `sitemap.xml`)
+- `.github/workflows/pages.yml` — GitHub Pages deploy pipeline
 
 ## Build, Test, and Development Commands
-- `pnpm install`: install dependencies and honor the committed `pnpm` lockfile.
-- `pnpm start`: run the local Vite dev server at `127.0.0.1:8080`.
-- `pnpm build`: create the production bundle in `dist/`. This is the baseline validation command.
-- `pnpm preview`: serve the built site locally at `127.0.0.1:4173`.
-- `pnpm lint`: run Biome lint rules across the repository.
-- `pnpm format`: apply Biome formatting in place.
-- `pnpm check`: run Biome formatting, import organization, and lint checks together.
 
-There is no real automated test suite yet. `pnpm test` intentionally exits with failure and must not be used as a completion signal.
+- `pnpm install` — install dependencies (uses frozen lockfile in CI)
+- `pnpm start` — dev server at `127.0.0.1:8080` with auto-open browser
+- `pnpm build` — production bundle to `dist/` (baseline validation)
+- `pnpm preview` — serve built site at `127.0.0.1:4173`
+- `pnpm check` — Biome lint, format, and import checks
+- `pnpm format` — apply Biome formatting in place
+- `pnpm lint` — Biome lint only
+
+**Note:** `pnpm test` intentionally fails. There is no automated test suite yet.
+
+**Validation order:** `pnpm build` → `pnpm check` → manual browser check with `pnpm start`
 
 ## Coding Style & Naming Conventions
-Use plain HTML, CSS, and modern JavaScript. Let Biome be the source of truth for formatting, import organization, and linting; do not introduce separate ESLint or Prettier config unless the repo explicitly re-scopes that decision. Keep page-specific setup in the page entrypoint and move reusable logic into `src/assets/javascripts/`. Prefer descriptive kebab-case filenames such as `github-projects.js`. Extend the existing visual language instead of introducing a new design system unless the task explicitly asks for one.
+
+- Plain HTML, CSS, and modern JavaScript (no frameworks)
+- **Biome is the source of truth** for formatting, imports, and linting (config: `biome.json`)
+- **Tab indentation**, **double quotes** for JavaScript
+- Do not introduce ESLint or Prettier configs
+- Use kebab-case for filenames (e.g., `github-projects.js`)
+- Keep page-specific logic in entry points; reusable code goes in `src/assets/javascripts/`
+- Extend existing visual language; do not introduce new design systems unless requested
 
 ## Testing Guidelines
-Minimum verification for changes is:
-- `pnpm build`
-- `pnpm check`
-- manual browser validation with `pnpm start`
 
-For layout, responsive, or modal changes, verify both desktop and mobile-width behavior. If tests are added later, place them near the related feature and use clear names such as `featured-projects.test.js`.
+No automated tests. Minimum verification:
+
+1. `pnpm build`
+2. `pnpm check`
+3. Manual browser validation with `pnpm start`
+
+For layout/responsive changes, verify both desktop and mobile widths.
 
 ## Commit & Pull Request Guidelines
-Follow Conventional Commits used in history, for example `feat(site): load featured projects from github` or `fix(seo): shorten privacy metadata`. PRs should include a concise summary, screenshots for visible UI changes, and the exact verification performed.
 
-## Security & Agent Notes
-Prefer `pnpm` over `npm`; this repo uses `pnpm-lock.yaml` and committed `pnpm.overrides` for security fixes. Check local files first, then use approved tools. Prefer `rg` for search, `pnpm build` and `pnpm check` for validation, `gh` for PR, review, and security-alert workflows when GitHub context is required, and Biome as the repository replacement for ESLint and Prettier. Use available skills only when they match the task, especially GitHub plugin skills for PR triage, review feedback, CI debugging, or publishing.
+- **Conventional Commits:** `feat(site): ...`, `fix(seo): ...`, `chore(config): ...`
+- PRs should include a concise summary, screenshots for visible UI changes, and exact verification steps
+- Deploys automatically on merge to `main` via GitHub Pages workflow
+
+## Agent-Specific Instructions
+
+- **Package manager:** Use `pnpm` only. Never use `npm` or `npx`.
+- **Lockfile:** `pnpm-lock.yaml` is committed; security overrides are in `package.json`
+- **Search:** Prefer `rg` for code search
+- **Validation:** Always run `pnpm build` and `pnpm check` before finishing
+- **Vite config quirks:**
+  - Root is `src/`, build output is `../dist`
+  - `server.open: true` auto-opens browser
+  - `esbuild.drop: ['console', 'debugger']` strips debug code in production
+  - `build.sourcemap: 'hidden'` generates maps without exposing references
+- **GitHub workflows:** Use `gh` CLI for PR/review/security-alert tasks when needed
+- **Skills:** Use available OpenCode skills only when they match the task (e.g., GitHub plugin skills for PR triage)
