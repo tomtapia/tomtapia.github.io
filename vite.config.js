@@ -32,6 +32,7 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, 'src/index.html'),
         privacy: resolve(__dirname, 'src/privacy.html'),
+        blog: resolve(__dirname, 'src/blog.html'),
       },
     },
   },
