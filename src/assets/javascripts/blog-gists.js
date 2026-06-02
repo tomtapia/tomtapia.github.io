@@ -99,14 +99,12 @@ function renderArticleDetail(gist, content, container) {
 	header.append(title, meta);
 
 	const body = createElement("div", "blog-article-body");
-	// eslint-disable-next-line no-undef
-	body.innerHTML = marked.parse(content);
+	body.innerHTML = window.marked.parse(content);
 
 	// Apply syntax highlighting
 	const codeBlocks = body.querySelectorAll("pre code");
 	for (const block of codeBlocks) {
-		// eslint-disable-next-line no-undef
-		hljs.highlightElement(block);
+		window.hljs.highlightElement(block);
 	}
 
 	// Open external links in new tab
