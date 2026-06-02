@@ -77,8 +77,7 @@ Full tech stack [here](/techstack.md)
 
 |NAME|VERSION|LAST UPDATED|LAST UPDATED BY|LICENSE|VULNERABILITIES|
 |:------|:------|:------|:------|:------|:------|
-|[http-server](https://github.com/http-party/http-server)|v14.1.1|03/10/26|Tomás Tapia |MIT|N/A|
-
+|[http-server](https://github.com/http-party/http-server)|v14.1.1|04/24/26|Tomás Tapia |MIT|N/A|
 <br/>
 <div align='center'>
 
