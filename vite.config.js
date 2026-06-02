@@ -9,6 +9,7 @@ export default defineConfig({
     host: '127.0.0.1',
     port: 8080,
     strictPort: true,
+    open: true,
   },
   preview: {
     host: '127.0.0.1',
@@ -20,9 +21,13 @@ export default defineConfig({
       minify: true,
     }),
   ],
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
   build: {
     outDir: '../dist',
     emptyOutDir: true,
+    sourcemap: 'hidden',
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'src/index.html'),

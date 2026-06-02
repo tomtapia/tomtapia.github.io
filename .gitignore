@@ -13,6 +13,7 @@ build/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-store/
 .pnp/
 .pnp.js
 *.tsbuildinfo
@@ -38,3 +39,21 @@ yarn-error.log*
 *.pid
 *.seed
 *.gz
+
+# CodeGraph data files
+# These are local to each machine and should not be committed
+.codegraph/
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+
+# Cache
+cache/
+
+# Logs
+*.log
+
+# Hook markers
+.dirty

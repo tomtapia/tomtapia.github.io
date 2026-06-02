@@ -1,41 +1,39 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-This repository is a Vite-based static site for `tomtapia.github.io`.
-
-- `src/index.html` and `src/privacy.html`: page entry files
-- `src/main.js` and `src/privacy.js`: Vite entrypoints per page
-- `src/assets/javascripts/`: shared browser logic such as `scripts.js` and `github-projects.js`
-- `src/assets/stylesheets/style.css`: primary site styling
-- `src/assets/images/`: local images and certificate assets
-- `src/public/`: static files copied as-is at build time, such as `robots.txt` and `sitemap.xml`
-- `.github/workflows/`: GitHub Actions for Pages deploy and repository automation
+This repo is a Vite-based static site for `tomtapia.github.io`. Keep page entry files in `src/`:
+- `src/index.html` and `src/privacy.html` define page markup.
+- `src/main.js` and `src/privacy.js` bootstrap each page.
+- `src/assets/javascripts/` holds shared browser logic such as `scripts.js` and `github-projects.js`.
+- `src/assets/stylesheets/style.css` is the main stylesheet.
+- `src/assets/images/` stores local image assets.
+- `src/public/` contains static files copied as-is at build time, including `robots.txt` and `sitemap.xml`.
+- `.github/workflows/` contains Pages deploy and repository automation workflows.
 
 ## Build, Test, and Development Commands
-- `pnpm install`: install dependencies
-- `pnpm start`: run the local dev server on `127.0.0.1:8080`
-- `pnpm build`: produce the production build in `dist/`
-- `pnpm preview`: serve the built output locally on `127.0.0.1:4173`
+- `pnpm install`: install dependencies and honor the committed `pnpm` lockfile.
+- `pnpm start`: run the local Vite dev server at `127.0.0.1:8080`.
+- `pnpm build`: create the production bundle in `dist/`. This is the baseline validation command.
+- `pnpm preview`: serve the built site locally at `127.0.0.1:4173`.
+- `pnpm lint`: run Biome lint rules across the repository.
+- `pnpm format`: apply Biome formatting in place.
+- `pnpm check`: run Biome formatting, import organization, and lint checks together.
 
-There is no real automated test suite yet. The current `pnpm test` script intentionally fails and should not be used as validation.
+There is no real automated test suite yet. `pnpm test` intentionally exits with failure and must not be used as a completion signal.
 
 ## Coding Style & Naming Conventions
-Use plain HTML, CSS, and modern JavaScript with 2-space indentation. Keep page-specific bootstrap logic in the page entrypoint and reusable code in `src/assets/javascripts/`. Prefer descriptive kebab-case filenames like `github-projects.js`. Keep CSS additions in the existing visual language; avoid introducing a separate design system unless requested.
+Use plain HTML, CSS, and modern JavaScript. Let Biome be the source of truth for formatting, import organization, and linting; do not introduce separate ESLint or Prettier config unless the repo explicitly re-scopes that decision. Keep page-specific setup in the page entrypoint and move reusable logic into `src/assets/javascripts/`. Prefer descriptive kebab-case filenames such as `github-projects.js`. Extend the existing visual language instead of introducing a new design system unless the task explicitly asks for one.
 
 ## Testing Guidelines
-Minimum verification for any change is:
+Minimum verification for changes is:
 - `pnpm build`
-- manual browser check with `pnpm start`
+- `pnpm check`
+- manual browser validation with `pnpm start`
 
-When changing layout, responsive behavior, or modals, verify both desktop and mobile-width behavior. If adding tests later, place them near the related feature and use clear names such as `featured-projects.test.js`.
+For layout, responsive, or modal changes, verify both desktop and mobile-width behavior. If tests are added later, place them near the related feature and use clear names such as `featured-projects.test.js`.
 
 ## Commit & Pull Request Guidelines
-Follow the existing Conventional Commit pattern from git history:
-- `feat(site): load featured projects from github`
-- `fix(seo): shorten privacy metadata`
-- `refactor(site): polish projects and certification modal`
+Follow Conventional Commits used in history, for example `feat(site): load featured projects from github` or `fix(seo): shorten privacy metadata`. PRs should include a concise summary, screenshots for visible UI changes, and the exact verification performed.
 
-PRs should include a concise summary, screenshots for visible UI changes, and the exact verification performed.
-
-## Agent-Specific Instructions
-Agents should prefer local repo inspection first, then approved tools. Use available skills when they clearly match the task, especially `using-superpowers`, `brainstorming` for UI/feature work, `systematic-debugging` for defects, and `verification-before-completion` before claiming success. Prefer `rg` for search, `gh` for PR/review workflows, and `pnpm build` as the baseline validation step.
+## Security & Agent Notes
+Prefer `pnpm` over `npm`; this repo uses `pnpm-lock.yaml` and committed `pnpm.overrides` for security fixes. Check local files first, then use approved tools. Prefer `rg` for search, `pnpm build` and `pnpm check` for validation, `gh` for PR, review, and security-alert workflows when GitHub context is required, and Biome as the repository replacement for ESLint and Prettier. Use available skills only when they match the task, especially GitHub plugin skills for PR triage, review feedback, CI debugging, or publishing.
