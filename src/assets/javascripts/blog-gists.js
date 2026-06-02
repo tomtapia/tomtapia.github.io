@@ -1,5 +1,25 @@
 const GITHUB_USER = "tomtapia";
 const GISTS_API_URL = `https://api.github.com/users/${GITHUB_USER}/gists`;
+const MAX_DESCRIPTION_LENGTH = 120;
+
+const TECH_TAGS = {
+	vite: { label: "Vite", color: "#646cff" },
+	react: { label: "React", color: "#61dafb" },
+	docker: { label: "Docker", color: "#2496ed" },
+	kubernetes: { label: "Kubernetes", color: "#326ce5" },
+	aws: { label: "AWS", color: "#ff9900" },
+	gcp: { label: "GCP", color: "#4285f4" },
+	azure: { label: "Azure", color: "#0078d4" },
+	terraform: { label: "Terraform", color: "#844fba" },
+	javascript: { label: "JavaScript", color: "#f7df1e" },
+	typescript: { label: "TypeScript", color: "#3178c6" },
+	python: { label: "Python", color: "#3776ab" },
+	go: { label: "Go", color: "#00add8" },
+	"ci/cd": { label: "CI/CD", color: "#00bcd4" },
+	devops: { label: "DevOps", color: "#00bcd4" },
+	performance: { label: "Performance", color: "#4caf50" },
+	security: { label: "Security", color: "#f44336" },
+};
 
 function createElement(tag, className, text) {
 	const element = document.createElement(tag);
@@ -22,6 +42,31 @@ function getMarkdownFile(gist) {
 	return files.find((file) => file.filename.endsWith(".md"));
 }
 
+function extractTags(title, description) {
+	const text = `${title} ${description}`.toLowerCase();
+	const tags = [];
+	for (const [key, tag] of Object.entries(TECH_TAGS)) {
+		if (text.includes(key)) {
+			tags.push(tag);
+		}
+	}
+	return tags.slice(0, 4);
+}
+
+function extractDescription(content) {
+	if (!content) return "";
+	const lines = content.split("\n");
+	for (const line of lines) {
+		const trimmed = line.trim();
+		if (trimmed && !trimmed.startsWith("#") && !trimmed.startsWith("```")) {
+			return trimmed.length > MAX_DESCRIPTION_LENGTH
+				? `${trimmed.slice(0, MAX_DESCRIPTION_LENGTH)}...`
+				: trimmed;
+		}
+	}
+	return "";
+}
+
 async function fetchGists() {
 	const response = await fetch(GISTS_API_URL);
 	if (!response.ok) {
@@ -38,7 +83,7 @@ async function fetchMarkdownContent(rawUrl) {
 	return response.text();
 }
 
-function renderArticleList(gists, container) {
+async function renderArticleList(gists, container) {
 	container.innerHTML = "";
 
 	const markdownGists = gists
@@ -58,24 +103,41 @@ function renderArticleList(gists, container) {
 	const grid = createElement("div", "blog-grid");
 
 	for (const gist of markdownGists) {
+		const titleText =
+			gist.description || gist.markdownFile.filename.replace(/\.md$/i, "");
+
+		let description = "";
+		try {
+			const content = await fetchMarkdownContent(gist.markdownFile.raw_url);
+			description = extractDescription(content);
+		} catch {
+			description = "";
+		}
+
+		const tags = extractTags(titleText, gist.description || "");
+
 		const card = createElement("article", "blog-card");
 		const link = createElement("a", "blog-card-link");
 		link.href = `#${gist.id}`;
 
-		const titleText =
-			gist.description || gist.markdownFile.filename.replace(/\.md$/i, "");
 		const title = createElement("h2", "blog-card-title", titleText);
 
 		const meta = createElement("div", "blog-card-meta");
 		meta.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(gist.created_at)}</span>`;
 
-		const filename = createElement(
-			"p",
-			"blog-card-filename",
-			gist.markdownFile.filename,
-		);
+		const desc = createElement("p", "blog-card-description", description);
 
-		link.append(title, meta, filename);
+		const tagsContainer = createElement("div", "blog-card-tags");
+		for (const tag of tags) {
+			const badge = createElement("span", "blog-tag");
+			badge.textContent = tag.label;
+			badge.style.backgroundColor = `${tag.color}20`;
+			badge.style.color = tag.color;
+			badge.style.borderColor = `${tag.color}40`;
+			tagsContainer.append(badge);
+		}
+
+		link.append(title, meta, desc, tagsContainer);
 		card.append(link);
 		grid.append(card);
 	}
@@ -101,13 +163,11 @@ function renderArticleDetail(gist, content, container) {
 	const body = createElement("div", "blog-article-body");
 	body.innerHTML = window.marked.parse(content);
 
-	// Apply syntax highlighting
 	const codeBlocks = body.querySelectorAll("pre code");
 	for (const block of codeBlocks) {
 		window.hljs.highlightElement(block);
 	}
 
-	// Open external links in new tab
 	const links = body.querySelectorAll('a[href^="http"]');
 	for (const link of links) {
 		link.setAttribute("target", "_blank");
@@ -145,7 +205,7 @@ export async function initBlog() {
 				error.classList.remove("d-none");
 			}
 		} else {
-			renderArticleList(markdownGists, container);
+			await renderArticleList(markdownGists, container);
 		}
 
 		window.addEventListener("hashchange", () => {

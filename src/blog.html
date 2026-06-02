@@ -38,7 +38,7 @@
     }
 
     .blog-hero h1 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 0.5rem;
@@ -46,15 +46,27 @@
 
     .blog-hero p {
       color: var(--text-secondary);
-      font-size: 1.1rem;
+      font-size: 0.95rem;
     }
 
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
-      max-width: 960px;
+      max-width: 1200px;
       margin: 0 auto;
+    }
+
+    @media (max-width: 991px) {
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 575px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .blog-card {
@@ -63,6 +75,8 @@
       border-radius: 12px;
       padding: 1.75rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      display: flex;
+      flex-direction: column;
     }
 
     .blog-card:hover {
@@ -72,16 +86,18 @@
     }
 
     .blog-card-link {
-      display: block;
+      display: flex;
+      flex-direction: column;
       text-decoration: none;
       color: inherit;
+      flex: 1;
     }
 
     .blog-card-title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-primary);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
       line-height: 1.4;
     }
 
@@ -90,15 +106,33 @@
       align-items: center;
       gap: 0.4rem;
       color: var(--text-muted);
-      font-size: 0.875rem;
+      font-size: 0.8rem;
       margin-bottom: 0.75rem;
     }
 
-    .blog-card-filename {
-      color: var(--text-muted);
-      font-size: 0.8rem;
+    .blog-card-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0 0 1rem 0;
+      flex: 1;
+    }
+
+    .blog-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .blog-tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: 1px solid;
       font-family: 'IBM Plex Mono', monospace;
-      margin: 0;
     }
 
     .blog-empty {
