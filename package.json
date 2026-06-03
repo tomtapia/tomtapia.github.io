@@ -1,44 +1,44 @@
 {
-  "name": "githubpage",
-  "version": "0.0.1",
-  "description": "Official page about me :).",
-  "packageManager": "pnpm@10.31.0",
-  "pnpm": {
-    "overrides": {
-      "brace-expansion": "^2.0.3",
-      "follow-redirects": "^1.16.0",
-      "picomatch@^2.2.2": "^2.3.2",
-      "picomatch@^4.0.3": "^4.0.4"
-    }
-  },
-  "main": "src/index.html",
-  "scripts": {
-    "start": "vite --host 127.0.0.1 --port 8080",
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --host 127.0.0.1 --port 4173",
-    "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check": "biome check .",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tomtapia/tomtapia.github.io.git"
-  },
-  "author": "Tomás Tapia",
-  "license": "GPL-2.0",
-  "bugs": {
-    "url": "https://github.com/tomtapia/tomtapia.github.io/issues"
-  },
-  "homepage": "https://github.com/tomtapia/tomtapia.github.io#readme",
-  "devDependencies": {
-    "@biomejs/biome": "2.4.14",
-    "@playwright/test": "^1.60.0",
-    "http-server": "^14.1.1",
-    "playwright": "^1.60.0",
-    "squirrelscan": "^0.0.38",
-    "vite": "^7.3.5",
-    "vite-plugin-html": "^3.2.2"
-  }
+	"name": "githubpage",
+	"version": "0.0.1",
+	"description": "Official page about me :).",
+	"packageManager": "pnpm@10.31.0",
+	"pnpm": {
+		"overrides": {
+			"brace-expansion": "^2.0.3",
+			"follow-redirects": "^1.16.0",
+			"picomatch@^2.2.2": "^2.3.2",
+			"picomatch@^4.0.3": "^4.0.4"
+		}
+	},
+	"main": "src/index.html",
+	"scripts": {
+		"start": "vite --host 127.0.0.1 --port 8080",
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview --host 127.0.0.1 --port 4173",
+		"lint": "biome lint .",
+		"format": "biome format --write .",
+		"check": "biome check .",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/tomtapia/tomtapia.github.io.git"
+	},
+	"author": "Tomás Tapia",
+	"license": "GPL-2.0",
+	"bugs": {
+		"url": "https://github.com/tomtapia/tomtapia.github.io/issues"
+	},
+	"homepage": "https://github.com/tomtapia/tomtapia.github.io#readme",
+	"devDependencies": {
+		"@biomejs/biome": "2.4.14",
+		"@playwright/test": "^1.60.0",
+		"http-server": "^14.1.1",
+		"playwright": "^1.60.0",
+		"squirrelscan": "^0.0.38",
+		"vite": "^7.3.5",
+		"vite-plugin-html": "^3.2.2"
+	}
 }

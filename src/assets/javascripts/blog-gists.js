@@ -1,6 +1,7 @@
 const GITHUB_USER = "tomtapia";
 const GISTS_API_URL = `https://api.github.com/users/${GITHUB_USER}/gists`;
-const MAX_DESCRIPTION_LENGTH = 120;
+const ARTICLES_PER_PAGE = 3;
+const MAX_DESCRIPTION_LENGTH = 200;
 
 const TECH_TAGS = {
 	vite: { label: "Vite", color: "#646cff" },
@@ -20,6 +21,9 @@ const TECH_TAGS = {
 	performance: { label: "Performance", color: "#4caf50" },
 	security: { label: "Security", color: "#f44336" },
 };
+
+let currentPage = 1;
+let allArticles = [];
 
 function createElement(tag, className, text) {
 	const element = document.createElement(tag);
@@ -50,7 +54,7 @@ function extractTags(title, description) {
 			tags.push(tag);
 		}
 	}
-	return tags.slice(0, 4);
+	return tags.slice(0, 5);
 }
 
 function extractDescription(content) {
@@ -83,9 +87,16 @@ async function fetchMarkdownContent(rawUrl) {
 	return response.text();
 }
 
-async function renderArticleList(gists, container) {
-	container.innerHTML = "";
+function createTagElement(tag) {
+	const badge = createElement("span", "blog-tag");
+	badge.textContent = tag.label;
+	badge.style.backgroundColor = `${tag.color}18`;
+	badge.style.color = tag.color;
+	badge.style.borderColor = `${tag.color}40`;
+	return badge;
+}
 
+async function enrichArticles(gists) {
 	const markdownGists = gists
 		.map((gist) => ({ ...gist, markdownFile: getMarkdownFile(gist) }))
 		.filter((gist) => gist.markdownFile)
@@ -94,18 +105,10 @@ async function renderArticleList(gists, container) {
 				new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
 		);
 
-	if (markdownGists.length === 0) {
-		const empty = createElement("p", "blog-empty", "No articles found.");
-		container.append(empty);
-		return;
-	}
-
-	const grid = createElement("div", "blog-grid");
-
+	const enriched = [];
 	for (const gist of markdownGists) {
 		const titleText =
 			gist.description || gist.markdownFile.filename.replace(/\.md$/i, "");
-
 		let description = "";
 		try {
 			const content = await fetchMarkdownContent(gist.markdownFile.raw_url);
@@ -113,51 +116,211 @@ async function renderArticleList(gists, container) {
 		} catch {
 			description = "";
 		}
-
 		const tags = extractTags(titleText, gist.description || "");
-
-		const card = createElement("article", "blog-card");
-		const link = createElement("a", "blog-card-link");
-		link.href = `#${gist.id}`;
-
-		const title = createElement("h2", "blog-card-title", titleText);
-
-		const meta = createElement("div", "blog-card-meta");
-		meta.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(gist.created_at)}</span>`;
-
-		const desc = createElement("p", "blog-card-description", description);
-
-		const tagsContainer = createElement("div", "blog-card-tags");
-		for (const tag of tags) {
-			const badge = createElement("span", "blog-tag");
-			badge.textContent = tag.label;
-			badge.style.backgroundColor = `${tag.color}20`;
-			badge.style.color = tag.color;
-			badge.style.borderColor = `${tag.color}40`;
-			tagsContainer.append(badge);
-		}
-
-		link.append(title, meta, desc, tagsContainer);
-		card.append(link);
-		grid.append(card);
+		enriched.push({ ...gist, titleText, description, tags });
 	}
-
-	container.append(grid);
+	return enriched;
 }
 
-function renderArticleDetail(gist, content, container) {
+function renderFeaturedCard(article) {
+	const card = createElement("article", "blog-featured-card");
+
+	const titleLink = createElement("a", "");
+	titleLink.href = `#${article.id}`;
+
+	const label = createElement("span", "blog-featured-label", "Article");
+	const title = createElement("h2", "blog-featured-title");
+	title.append(titleLink);
+	titleLink.textContent = article.titleText;
+
+	const desc = createElement(
+		"p",
+		"blog-featured-description",
+		article.description,
+	);
+
+	const meta = createElement("div", "blog-featured-meta");
+	const date = createElement("span", "blog-featured-date");
+	date.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(article.created_at)}</span>`;
+	meta.append(date);
+
+	if (article.tags.length > 0) {
+		const tagsContainer = createElement("div", "blog-featured-tags");
+		for (const tag of article.tags) {
+			tagsContainer.append(createTagElement(tag));
+		}
+		meta.append(tagsContainer);
+	}
+
+	const readBtn = createElement("a", "blog-read-btn", "Read Article");
+	readBtn.href = `#${article.id}`;
+
+	card.append(label, title, desc, meta, readBtn);
+	return card;
+}
+
+function renderPagination(totalPages, container) {
 	container.innerHTML = "";
+	if (totalPages <= 1) return;
+
+	const pagination = createElement("div", "blog-pagination");
+
+	const prevBtn = createElement("button", "blog-page-btn", "<");
+	prevBtn.disabled = currentPage === 1;
+	prevBtn.addEventListener("click", () => {
+		if (currentPage > 1) {
+			currentPage--;
+			renderArticleList();
+		}
+	});
+	pagination.append(prevBtn);
+
+	for (let i = 1; i <= totalPages; i++) {
+		const btn = createElement("button", "blog-page-btn", String(i));
+		if (i === currentPage) btn.classList.add("active");
+		btn.addEventListener("click", () => {
+			currentPage = i;
+			renderArticleList();
+		});
+		pagination.append(btn);
+	}
+
+	const nextBtn = createElement("button", "blog-page-btn", ">");
+	nextBtn.disabled = currentPage === totalPages;
+	nextBtn.addEventListener("click", () => {
+		if (currentPage < totalPages) {
+			currentPage++;
+			renderArticleList();
+		}
+	});
+	pagination.append(nextBtn);
+
+	container.append(pagination);
+}
+
+function renderArticleList() {
+	const container = document.querySelector("#blog-articles-list");
+	const paginationContainer = document.querySelector("#blog-pagination");
+	if (!container) return;
+
+	container.innerHTML = "";
+
+	const totalPages = Math.ceil(allArticles.length / ARTICLES_PER_PAGE);
+	const start = (currentPage - 1) * ARTICLES_PER_PAGE;
+	const pageArticles = allArticles.slice(start, start + ARTICLES_PER_PAGE);
+
+	for (const article of pageArticles) {
+		container.append(renderFeaturedCard(article));
+	}
+
+	renderPagination(totalPages, paginationContainer);
+}
+
+function renderSidebar() {
+	const container = document.querySelector("#blog-sidebar");
+	if (!container) return;
+
+	container.innerHTML = "";
+
+	// Newsletter
+	const newsletterSection = createElement("div", "blog-sidebar-section");
+	const newsLabel = createElement(
+		"span",
+		"blog-featured-label",
+		"Newsletter Signup",
+	);
+	const newsTitle = createElement(
+		"h3",
+		"blog-newsletter-title",
+		"Stay Updated",
+	);
+	const newsDesc = createElement(
+		"p",
+		"blog-newsletter-desc",
+		"Stay updated and receive our blog's new articles. Subscribe to our newsletter for the latest content.",
+	);
+
+	const form = createElement("div", "blog-newsletter-form");
+	const input = createElement("input", "blog-newsletter-input");
+	input.type = "email";
+	input.placeholder = "Email";
+	const btn = createElement("button", "blog-newsletter-btn", "Subscribe");
+	btn.addEventListener("click", (e) => {
+		e.preventDefault();
+		btn.textContent = "Subscribed!";
+		btn.disabled = true;
+		input.value = "";
+		setTimeout(() => {
+			btn.textContent = "Subscribe";
+			btn.disabled = false;
+		}, 2000);
+	});
+	form.append(input, btn);
+
+	newsletterSection.append(newsLabel, newsTitle, newsDesc, form);
+	container.append(newsletterSection);
+
+	// Latest Posts
+	const postsSection = createElement("div", "blog-sidebar-section");
+	const postsTitle = createElement("h3", "blog-sidebar-title", "Latest Posts");
+	postsSection.append(postsTitle);
+
+	const sidebarArticles = allArticles.slice(0, 6);
+	for (const article of sidebarArticles) {
+		const item = createElement("div", "blog-sidebar-item");
+
+		const itemTitle = createElement("h4", "blog-sidebar-item-title");
+		const itemLink = createElement("a", "", article.titleText);
+		itemLink.href = `#${article.id}`;
+		itemTitle.append(itemLink);
+
+		const itemMeta = createElement("div", "blog-sidebar-item-meta");
+		itemMeta.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(article.created_at)}</span>`;
+
+		const itemDesc = createElement(
+			"p",
+			"blog-sidebar-item-desc",
+			article.description,
+		);
+
+		const itemTags = createElement("div", "blog-sidebar-item-tags");
+		for (const tag of article.tags.slice(0, 4)) {
+			itemTags.append(createTagElement(tag));
+		}
+
+		item.append(itemTitle, itemMeta, itemDesc, itemTags);
+		postsSection.append(item);
+	}
+
+	container.append(postsSection);
+}
+
+function renderArticleDetail(article, content) {
+	const listContainer = document.querySelector("#blog-articles-list");
+	const paginationContainer = document.querySelector("#blog-pagination");
+	const sidebar = document.querySelector("#blog-sidebar");
+
+	if (listContainer) listContainer.innerHTML = "";
+	if (paginationContainer) paginationContainer.innerHTML = "";
+	if (sidebar) sidebar.style.display = "none";
+
+	const container = createElement("div", "col-12");
 
 	const backLink = createElement("a", "blog-back-link");
 	backLink.href = "#";
 	backLink.innerHTML = "<i class='bx bx-arrow-back'></i> Back to articles";
+	backLink.addEventListener("click", (e) => {
+		e.preventDefault();
+		window.location.hash = "";
+		if (sidebar) sidebar.style.display = "";
+		renderArticleList();
+		renderSidebar();
+	});
 
 	const header = createElement("header", "blog-article-header");
-	const titleText =
-		gist.description || gist.markdownFile.filename.replace(/\.md$/i, "");
-	const title = createElement("h1", "blog-article-title", titleText);
+	const title = createElement("h1", "blog-article-title", article.titleText);
 	const meta = createElement("div", "blog-article-meta");
-	meta.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(gist.created_at)}</span>`;
+	meta.innerHTML = `<i class="bx bx-calendar"></i> <span>${formatDate(article.created_at)}</span>`;
 	header.append(title, meta);
 
 	const body = createElement("div", "blog-article-body");
@@ -175,37 +338,43 @@ function renderArticleDetail(gist, content, container) {
 	}
 
 	container.append(backLink, header, body);
+
+	const row = document.querySelector("#blog-content");
+	if (row) {
+		row.innerHTML = "";
+		row.appendChild(container);
+	}
 }
 
 export async function initBlog() {
-	const container = document.querySelector("#blog-content");
 	const loading = document.querySelector("#blog-loading");
 	const error = document.querySelector("#blog-error");
 
-	if (!container || !loading || !error) {
+	if (!loading || !error) {
 		return;
 	}
 
 	try {
 		const gists = await fetchGists();
-		const markdownGists = gists
-			.map((gist) => ({ ...gist, markdownFile: getMarkdownFile(gist) }))
-			.filter((gist) => gist.markdownFile);
+		allArticles = await enrichArticles(gists);
 
 		const hash = window.location.hash.slice(1);
 
 		if (hash) {
-			const gist = markdownGists.find((g) => g.id === hash);
-			if (gist) {
-				const content = await fetchMarkdownContent(gist.markdownFile.raw_url);
-				renderArticleDetail(gist, content, container);
-				document.title = `${gist.description || "Article"} | Blog | Tomás Tapia`;
+			const article = allArticles.find((a) => a.id === hash);
+			if (article) {
+				const content = await fetchMarkdownContent(
+					article.markdownFile.raw_url,
+				);
+				renderArticleDetail(article, content);
+				document.title = `${article.titleText} | Blog | Tomás Tapia`;
 			} else {
 				error.textContent = "Article not found.";
 				error.classList.remove("d-none");
 			}
 		} else {
-			await renderArticleList(markdownGists, container);
+			renderArticleList();
+			renderSidebar();
 		}
 
 		window.addEventListener("hashchange", () => {
