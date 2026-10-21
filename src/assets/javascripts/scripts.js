@@ -604,29 +604,39 @@
 			return certificationModalInstance;
 		};
 
+		const openCertificationModal = (item) => {
+			const modalInstance = getCertificationModalInstance();
+
+			if (!modalInstance) {
+				console.error(
+					"Bootstrap Modal is not available for certification details.",
+				);
+				return;
+			}
+
+			const title = item.dataset.title;
+			const description = item.dataset.description;
+			const validationUrl = item.dataset.validationUrl;
+			const imgSrc = item.querySelector("img").src;
+
+			modalTitle.textContent = title;
+			modalDescription.textContent = description;
+			modalImage.src = imgSrc;
+			modalImage.alt = title;
+			modalLink.href = validationUrl;
+
+			modalInstance.show();
+		};
+
 		certificationItems.forEach((item) => {
-			item.addEventListener("click", () => {
-				const modalInstance = getCertificationModalInstance();
+			item.addEventListener("click", () => openCertificationModal(item));
 
-				if (!modalInstance) {
-					console.error(
-						"Bootstrap Modal is not available for certification details.",
-					);
-					return;
+			// Keyboard support for the role="button" certification cards.
+			item.addEventListener("keydown", (event) => {
+				if (event.key === "Enter" || event.key === " ") {
+					event.preventDefault();
+					openCertificationModal(item);
 				}
-
-				const title = item.dataset.title;
-				const description = item.dataset.description;
-				const validationUrl = item.dataset.validationUrl;
-				const imgSrc = item.querySelector("img").src;
-
-				modalTitle.textContent = title;
-				modalDescription.textContent = description;
-				modalImage.src = imgSrc;
-				modalImage.alt = title;
-				modalLink.href = validationUrl;
-
-				modalInstance.show();
 			});
 		});
 	}

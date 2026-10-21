@@ -1326,6 +1326,305 @@ a:hover {
 }
 
 /* ===================================
+   READING PROGRESS BAR
+   =================================== */
+.reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 3px;
+	background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+	transform: scaleX(0);
+	transform-origin: 0 50%;
+	z-index: 1200;
+	pointer-events: none;
+}
+
+/* The bar is scroll-linked orientation feedback (like the navbar state),
+   not autonomous motion, so it is not gated behind reduced-motion. */
+@supports (animation-timeline: scroll()) {
+	.reading-progress {
+		animation: reading-progress linear both;
+		animation-timeline: scroll(root block);
+	}
+}
+
+@keyframes reading-progress {
+	from {
+		transform: scaleX(0);
+	}
+
+	to {
+		transform: scaleX(1);
+	}
+}
+
+/* ===================================
+   SKELETON PLACEHOLDERS
+   =================================== */
+.skeleton {
+	position: relative;
+	overflow: hidden;
+	display: block;
+	background-color: color-mix(in srgb, var(--text-muted) 14%, transparent);
+	border-radius: 0.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.skeleton::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			90deg,
+			transparent,
+			rgb(255 255 255 / 0.08) 45%,
+			transparent 90%
+		);
+		transform: translateX(-100%);
+		animation: skeleton-shimmer 1.5s ease-in-out infinite;
+	}
+}
+
+@keyframes skeleton-shimmer {
+	to {
+		transform: translateX(100%);
+	}
+}
+
+/* Placeholder parts sized to mirror the loaded project card structure */
+.skeleton-icon {
+	width: 3.25rem;
+	height: 3.25rem;
+	flex: 0 0 auto;
+	border-radius: 0.75rem;
+}
+
+.skeleton-line {
+	height: 0.9rem;
+	width: 100%;
+}
+
+.skeleton-line-title {
+	height: 1.05rem;
+	width: 62%;
+	border-radius: 0.3rem;
+}
+
+.skeleton-line-meta {
+	height: 0.72rem;
+	width: 46%;
+	border-radius: 0.3rem;
+}
+
+.skeleton-line-desc {
+	width: 88%;
+}
+
+.skeleton-line-desc-tail {
+	width: 64%;
+}
+
+.skeleton-chip {
+	width: 9.5rem;
+	height: 2.05rem;
+	border-radius: 0.5rem;
+}
+
+.skeleton-line-stats {
+	height: 0.7rem;
+	width: 56%;
+	border-radius: 0.3rem;
+}
+
+.skeleton-stack {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+	min-width: 0;
+	flex: 1;
+}
+
+/* Project card placeholder reuses .project-card so dimensions match on replace */
+.project-card .skeleton-stack {
+	margin-bottom: 1rem;
+}
+
+.project-card .skeleton-stack:last-child {
+	margin-bottom: 0;
+}
+
+.project-card .skeleton-stack-body {
+	min-height: 9.5rem;
+}
+
+/* ===================================
+   SCROLL-TRIGGERED REVEALS
+   =================================== */
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		.reveal {
+			animation: reveal-enter linear both;
+			animation-timeline: view();
+			animation-range: entry 10% entry 45%;
+		}
+	}
+
+	.reveal-fallback .reveal {
+		opacity: 0;
+		translate: 0 1.25rem;
+		transition:
+			opacity 0.55s ease-out,
+			translate 0.55s ease-out;
+	}
+
+	.reveal-fallback .reveal.reveal-instant {
+		transition: none;
+	}
+
+	.reveal-fallback .reveal.is-revealed {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+@keyframes reveal-enter {
+	from {
+		opacity: 0;
+		translate: 0 1.25rem;
+	}
+
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+/* ===================================
+   MICROINTERACTIONS: FOCUS, PRESS, LIFT
+   =================================== */
+/* Consistent transition timing across interactive controls */
+.btn-primary-custom,
+.btn-outline-custom,
+.btn-social,
+#mainNav .nav-link,
+#mainNav .navbar-toggler {
+	transition:
+		color 0.18s ease,
+		background-color 0.18s ease,
+		border-color 0.18s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+/* Visible keyboard focus for custom interactive controls */
+.btn-primary-custom:focus-visible,
+.btn-outline-custom:focus-visible,
+.btn-social:focus-visible,
+#mainNav .nav-link:focus-visible,
+#mainNav .navbar-toggler:focus-visible,
+.contact-buttons .btn:focus-visible,
+.project-links .btn-outline-primary:focus-visible,
+.certification-item:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+.project-card:focus-within,
+.video-card:focus-within {
+	border-color: var(--accent-strong);
+}
+
+.certification-item:focus-visible .certification-img {
+	filter: saturate(1) contrast(1.04);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.btn-primary-custom:hover,
+	.btn-outline-custom:hover,
+	.contact-buttons .btn:hover,
+	.project-links .btn-outline-primary:hover,
+	.btn-social:hover {
+		transform: translateY(-2px);
+	}
+
+	.certification-item:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 10px 22px rgb(0 0 0 / 0.16);
+	}
+
+	.project-item:hover .project-card {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 28px rgb(0 0 0 / 0.18);
+	}
+}
+
+.btn-primary-custom:active,
+.btn-outline-custom:active,
+.contact-buttons .btn:active,
+.project-links .btn-outline-primary:active,
+.btn-social:active {
+	transform: translateY(0);
+}
+
+.certification-item:active {
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.btn-primary-custom:hover,
+	.btn-outline-custom:hover,
+	.contact-buttons .btn:hover,
+	.project-links .btn-outline-primary:hover,
+	.btn-social:hover {
+		transform: none;
+	}
+
+	.certification-item:hover {
+		transform: none;
+		box-shadow: none;
+	}
+
+	.project-item:hover .project-card {
+		transform: none;
+		box-shadow: none;
+	}
+}
+
+/* Card transition timing (extends the existing 0.18s design system pace) */
+.project-card {
+	transition:
+		border-color 0.18s ease,
+		background-color 0.18s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+.certification-item {
+	transition:
+		border-color 0.18s ease,
+		background-color 0.18s ease,
+		transform 0.2s ease,
+		box-shadow 0.2s ease;
+}
+
+/* Form controls: distinguishable focus and validation states */
+.theme-switcher-select:focus {
+	border-color: var(--accent);
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.theme-switcher-select:hover {
+		border-color: var(--border-strong);
+	}
+}
+
+/* ===================================
    UTILITIES
    =================================== */
 .text-secondary {
