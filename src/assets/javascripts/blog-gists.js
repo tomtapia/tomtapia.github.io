@@ -1,3 +1,5 @@
+import { refreshRevealFallback } from "./site-effects.js";
+
 const GITHUB_USER = "tomtapia";
 const GISTS_API_URL = `https://api.github.com/users/${GITHUB_USER}/gists`;
 const ARTICLES_PER_PAGE = 3;
@@ -123,7 +125,7 @@ async function enrichArticles(gists) {
 }
 
 function renderFeaturedCard(article) {
-	const card = createElement("article", "blog-featured-card");
+	const card = createElement("article", "blog-featured-card reveal");
 
 	const titleLink = createElement("a", "");
 	titleLink.href = `#${article.id}`;
@@ -163,7 +165,7 @@ function renderPagination(totalPages, container) {
 	container.innerHTML = "";
 	if (totalPages <= 1) return;
 
-	const pagination = createElement("div", "blog-pagination");
+	const pagination = createElement("div", "blog-pagination reveal");
 
 	const prevBtn = createElement("button", "blog-page-btn", "<");
 	prevBtn.disabled = currentPage === 1;
@@ -214,6 +216,7 @@ function renderArticleList() {
 	}
 
 	renderPagination(totalPages, paginationContainer);
+	refreshRevealFallback();
 }
 
 function renderSidebar() {
@@ -293,6 +296,7 @@ function renderSidebar() {
 	}
 
 	container.append(postsSection);
+	refreshRevealFallback();
 }
 
 function renderArticleDetail(article, content) {
@@ -385,6 +389,6 @@ export async function initBlog() {
 		error.textContent = "Failed to load articles. Please try again later.";
 		error.classList.remove("d-none");
 	} finally {
-		loading.classList.add("d-none");
+		loading.remove();
 	}
 }
