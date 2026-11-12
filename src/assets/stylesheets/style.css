@@ -1318,21 +1318,32 @@ a:hover {
 /* ===================================
    SCROLLBAR
    =================================== */
-::-webkit-scrollbar {
-	width: 8px;
+body {
+	--scrollbar-thumb: var(--text-muted);
+	--scrollbar-track: var(--bg-primary);
+	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+	scrollbar-width: thin;
 }
 
-::-webkit-scrollbar-track {
-	background: var(--bg-primary);
-}
+/* Legacy fallback for WebKit/Blink browsers without standard scrollbar props */
+@supports not (scrollbar-color: auto) {
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
 
-::-webkit-scrollbar-thumb {
-	background: var(--border-color);
-	border-radius: 4px;
-}
+	::-webkit-scrollbar-track {
+		background: var(--scrollbar-track);
+	}
 
-::-webkit-scrollbar-thumb:hover {
-	background: var(--accent);
+	::-webkit-scrollbar-thumb {
+		background: var(--scrollbar-thumb);
+		border-radius: 4px;
+	}
+
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--accent);
+	}
 }
 
 /* ===================================
