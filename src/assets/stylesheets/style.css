@@ -73,6 +73,25 @@ a:hover {
 }
 
 /* ===================================
+   BASE TYPOGRAPHY
+   =================================== */
+.lead {
+	font-size: 1.0625rem;
+	line-height: 1.7;
+}
+
+/* ===================================
+   LAYOUT
+   =================================== */
+.container {
+	max-width: var(--container-width);
+}
+
+.utility-page .container {
+	max-width: 840px;
+}
+
+/* ===================================
    NAVIGATION
    =================================== */
 .navbar-glass {
@@ -421,17 +440,9 @@ a:hover {
 	letter-spacing: -0.03em;
 }
 
-.container {
-	max-width: var(--container-width);
-}
-
 .utility-page {
 	padding: 7.5rem 0 4.5rem;
 	min-height: 100vh;
-}
-
-.utility-page .container {
-	max-width: 840px;
 }
 
 .utility-page-header {
@@ -696,7 +707,7 @@ a:hover {
 	top: 1rem;
 	right: 1rem;
 	background: transparent;
-	border: none;
+	border: 1px solid transparent;
 	color: var(--text-primary);
 	font-size: 1.5rem;
 	cursor: pointer;
@@ -711,7 +722,6 @@ a:hover {
 		color 0.18s ease,
 		border-color 0.18s ease;
 	z-index: 10;
-	border: 1px solid transparent;
 }
 
 .certification-modal-close:hover {
@@ -1628,12 +1638,7 @@ a:hover {
    UTILITIES
    =================================== */
 .text-secondary {
-	color: var(--text-secondary) !important;
-}
-
-.lead {
-	font-size: 1.0625rem;
-	line-height: 1.7;
+	color: var(--text-secondary);
 }
 
 @media (max-width: 991.98px) {

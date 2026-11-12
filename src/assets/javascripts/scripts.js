@@ -1,6 +1,4 @@
 (() => {
-	"use strict";
-
 	const themeConfig = {
 		dark: {
 			"editorial-copper": {
@@ -512,15 +510,15 @@
 				parsed.mode || fallbackMode,
 				parsed.palette || fallbackPalette,
 			);
-		} catch (error) {
+		} catch {
 			applyTheme(fallbackMode, fallbackPalette, { persist: false });
 		}
 	};
 
 	// Google Analytics
 	window.dataLayer = window.dataLayer || [];
-	function gtag() {
-		dataLayer.push(arguments);
+	function gtag(...args) {
+		dataLayer.push(args);
 	}
 	gtag("js", new Date());
 	gtag("config", "G-J6YT5K3JHY");
