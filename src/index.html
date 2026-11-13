@@ -10,7 +10,8 @@
   <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin" />
   <meta http-equiv="Cross-Origin-Resource-Policy" content="cross-origin" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta name="theme-color" content="#121417" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="author" content="Tomás Tapia" />
   <meta name="description"
@@ -40,7 +41,9 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <!-- Boxicons -->
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"
+    integrity="sha384-42kyIPf7HDYLkGffmxDhSx/3Z/53wGBs3nD6wEFxsbeDc7rMO6mkYbkAcpRsnMU2"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
   <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&display=swap"
@@ -615,35 +618,6 @@
     <div class="container">
       <small>Copyright © <a href="https://www.kaisanetwork.net/">Kaisa Network</a>. 2026</small>
     </div>
-  </div>
-
-  <div class="theme-switcher" id="themeSwitcher">
-    <button class="theme-switcher-toggle" id="themeSwitcherToggle" type="button" aria-expanded="false"
-      aria-controls="themeSwitcherPanel" aria-label="Open color palette switcher">
-      <i class='bx bx-palette'></i>
-    </button>
-    <aside class="theme-switcher-panel" id="themeSwitcherPanel" aria-label="Theme switcher" hidden>
-      <div class="theme-switcher-group">
-        <label class="theme-switcher-label" for="themeModeSelect">Mode</label>
-        <select class="theme-switcher-select" id="themeModeSelect">
-          <option value="dark">Dark</option>
-          <option value="light">Light</option>
-        </select>
-      </div>
-      <div class="theme-switcher-group">
-        <label class="theme-switcher-label" for="themePaletteSelect">Palette</label>
-        <select class="theme-switcher-select" id="themePaletteSelect">
-          <option value="minimal-effort">Minimal Effort</option>
-          <option value="editorial-copper">Editorial Copper</option>
-          <option value="graphite-olive">Graphite Olive</option>
-          <option value="stone-terracotta">Stone Terracotta</option>
-          <option value="slate-ink">Slate Ink</option>
-          <option value="charcoal-brass">Charcoal Brass</option>
-          <option value="ivory-editorial">Ivory Editorial</option>
-          <option value="sand-studio">Sand Studio</option>
-        </select>
-      </div>
-    </aside>
   </div>
 
   <!-- Bootstrap JS -->

@@ -73,7 +73,7 @@ This is a client-side rendered static website built with Vite. It consists of tw
 - Multi-page static site (not a SPA)
 - No JavaScript frameworks (React, Vue, Angular)
 - Vanilla JavaScript with DOM manipulation
-- CSS custom properties for theming (dark/light modes with multiple palettes)
+- CSS custom properties with a fixed dark theme (Minimal Effort palette)
 - External CDN dependencies for Bootstrap CSS, Boxicons, Google Fonts
 
 ## 5. Core Components
@@ -88,14 +88,13 @@ This is a client-side rendered static website built with Vite. It consists of tw
 - **Technologies:** HTML5, CSS (shared stylesheet)
 - **Deployment:** Built by Vite, deployed to GitHub Pages
 
-### 5.3 Theme Engine (`src/assets/javascripts/scripts.js`)
-- **Description:** Client-side theme management with dark/light mode toggle and 8 color palettes per mode
-- **Technologies:** Vanilla JavaScript, CSS Custom Properties
+### 5.3 Theme (`src/assets/stylesheets/style.css`)
+- **Description:** Fixed dark theme using the Minimal Effort palette; no runtime theme switching
+- **Technologies:** CSS Custom Properties
 - **Key Features:**
-  - 16 total themes (8 dark + 8 light palettes)
-  - LocalStorage persistence for theme preferences
-  - Smooth transitions between themes
-  - Scroll-based navbar styling
+  - Theme tokens (colors, surfaces, shadows) defined once in `:root`
+  - `color-scheme: dark` for native controls
+  - No runtime theme JavaScript or persisted preference
 
 ### 5.4 GitHub Projects Integration (`src/assets/javascripts/github-projects.js`)
 - **Description:** Fetches and displays public GitHub repositories dynamically
@@ -120,11 +119,9 @@ This is a client-side rendered static website built with Vite. It consists of tw
 No persistent data stores are used in this application. All data is either:
 - Static content embedded in HTML
 - Fetched at runtime from external APIs (GitHub API)
-- Stored in browser LocalStorage (theme preferences only)
 
 | Store | Type | Purpose |
 |-------|------|---------|
-| LocalStorage | Browser Storage | Theme mode and palette preferences |
 | GitHub API | External REST API | Public repository data for projects section |
 
 ## 7. External Integrations
@@ -232,11 +229,10 @@ No persistent data stores are used in this application. All data is either:
 | **CSP** | Content Security Policy - browser security mechanism to prevent XSS |
 | **esbuild** | Fast JavaScript bundler used by Vite |
 | **GitHub Pages** | Free static site hosting service from GitHub |
-| **LocalStorage** | Browser API for persistent key-value storage |
 | **pnpm** | Fast, disk-space efficient package manager |
 | **SRI** | Subresource Integrity - hash verification for CDN assets |
 | **Vite** | Next-generation frontend build tool |
 | **WebP** | Modern image format providing superior compression |
-| **CSS Custom Properties** | CSS variables for dynamic theming (`--property-name`) |
+| **CSS Custom Properties** | CSS variables for theme tokens (`--property-name`) |
 | **Boxicons** | Open-source icon font library |
 | **Bootstrap** | Popular CSS framework for responsive design |
