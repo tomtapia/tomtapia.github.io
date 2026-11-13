@@ -1,7 +1,7 @@
 # Resume Website
 
 ## Description
-This repository contains the source code for my professional resume website, highlighting my skills and experience in information technology and software engineering.
+This repository contains the source code for my professional resume and portfolio site, positioning me as a GenAI Forward Deployed Engineer who embeds with client teams to turn early AI prototypes into production-ready solutions.
 
 ## Technologies Used
 tomtapia/tomtapia.github.io is built on the following main stack:
